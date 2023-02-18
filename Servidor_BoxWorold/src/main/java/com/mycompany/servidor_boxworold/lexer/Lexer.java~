@@ -675,7 +675,7 @@ public class Lexer {
             // fall through
           case 4: break;
           case 2: 
-            { System.out.println(yytext());
+            { System.out.println(yytext()+"algo");
             } 
             // fall through
           case 5: break;

@@ -11,13 +11,6 @@
 %type Token
 //%standalone
     
-%{
- 
-%}
-%eofval{
-    
-%eofval}
-%eofclose
     // Palabras reservadas 
     nombre = "name"
     filas = "rows"
@@ -49,7 +42,11 @@
     llaveCerrada = "}"
     corcheteAbierto = "["
     corcheteCerrado = "]"
-    numeral = "#"    
+    numeral = "#" 
+    floor = "FLOOR"
+    ceil = "CEIL"   
+    parentesisAbierto = "("
+    parentesisCerrado = ")"
     //operadores
     multi = "*"
     div = "/"
@@ -64,44 +61,47 @@
 
 %%
 
-<YYINITIAL>{
-    {integer}   {}
-    {decimal} {}
-    {id} {}
-    {WhiteSpace} {}
-    {nombre} {}
-    {filas} {}
-    {columnas} {}
-    {configuracion} {}
-    {colorCajas} {}
-    {colorCajasObjetivo} {}
-    {lugarAlmacen} {}
-    {paredColor} {}
-    {caminoColor} {}
-    {nada} {}
-    {jugador} {}
-    {tablero} {}
-    {posX} {}
-    {posY} {}
-    {tipo} {}
-    {cajas} {}
-    {targets} {}
-    {player} {}
-    {pared} {}
-    {pasillo} {}
-    {comillasDobles} {}
-    {punto} {}
-    {puntoComa} {}
-    {coma} {}
-    {llaveAbierta} {}
-    {llaveCerrada} {}
-    {corcheteAbierto} {}
-    {corcheteCerrado} {}
-    {numeral} {}
-    {multi} {}
-    {div} {}
-    {resta} {}
-    {suma} {}
-
-}
-[^] {    }
+{integer}               {System.out.println(yytext()+"entero");}
+{decimal}               {System.out.println(yytext());}
+{id}                    {System.out.println(yytext());}
+{WhiteSpace}            {System.out.println(yytext());}
+{nombre}                {System.out.println(yytext());}
+{filas}                 {System.out.println(yytext());}
+{columnas}              {System.out.println(yytext());}
+{configuracion}         {System.out.println(yytext());}
+{colorCajas}            {System.out.println(yytext());}
+{colorCajasObjetivo}    {System.out.println(yytext());}
+{lugarAlmacen}          {System.out.println(yytext());}
+{paredColor}            {System.out.println(yytext());}
+{caminoColor}           {System.out.println(yytext());}
+{nada}                  {System.out.println(yytext());}
+{jugador}               {System.out.println(yytext());}
+{tablero}               {System.out.println(yytext());}
+{posX}                  {System.out.println(yytext());}
+{posY}                  {System.out.println(yytext());}
+{tipo}                  {System.out.println(yytext());}
+{cajas}                 {System.out.println(yytext());}
+{targets}               {System.out.println(yytext());}
+{player}                {System.out.println(yytext());}
+{pared}                 {System.out.println(yytext());}
+{pasillo}               {System.out.println(yytext());}
+{comillasDobles}        {System.out.println(yytext());}
+{punto}                 {System.out.println(yytext());}
+{puntoComa}             {System.out.println(yytext());}
+{coma}                  {System.out.println(yytext());}
+{llaveAbierta}          {System.out.println(yytext());}
+{llaveCerrada}          {System.out.println(yytext());}
+{corcheteAbierto}       {System.out.println(yytext());}
+{corcheteCerrado}       {System.out.println(yytext());}
+{numeral}               {System.out.println(yytext());}
+{multi}                 {System.out.println(yytext());}
+{div}                   {System.out.println(yytext());}
+{resta} {               System.out.println(yytext());}
+{suma}                  {System.out.println(yytext());}
+{dosPuntos}             {System.out.println(yytext());}
+{floor}                 {System.out.println(yytext());}
+{ceil}                  {System.out.println(yytext());}
+{parentesisAbierto}     {System.out.println(yytext());}       
+{parentesisCerrado}     {System.out.println(yytext());}
+          
+[^] {}
