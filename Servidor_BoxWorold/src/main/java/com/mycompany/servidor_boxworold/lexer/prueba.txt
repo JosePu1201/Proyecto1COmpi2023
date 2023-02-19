@@ -1,0 +1,61 @@
+
+/*
+terminal COMILLAS DOSPUNTOS COMA NOMBRE FILA COLUMNA ID NUMERO  
+no terminal inicio fin nombre col filas
+
+inicio ->   nombre  inicio
+inicio ->   filas inicio
+inicio ->   col inicio
+inicio ->   nombre
+inicio ->   filas
+inicio ->   col
+
+
+nombre ->   COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID COMILLAS COMA
+
+filas ->    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA
+
+col ->      COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA
+*/
+
+/*
+terminal CONFIG BOX_COLOR BOX_ON_TARGET_COLOR TARGET_COLOR BRICK_COLOR HALL_COLOR UNDEFINED_COLOR PLAYER_COLOR HEXADECIMAL LLAVEABIERTA LLAVECERRADA
+
+no terminal confi nose colorcajaFuera colorCajaAlmacen colorAlmacen colorPared colorCamino noDefinido colorJugador colore
+
+// configuracion aun no se si como agregar que puede aceptar un vacio o que no venga 
+confi ->            COMILLAS CONFIG COMILLAS DOSPUNTOS  LLAVEABIERTA nose  LLAVECERRADA 
+confi ->
+
+para las comas de cada comfiguracion permite repeticion pero tiene que cambiar en el analisis de codigo 
+nose -> colore COMA nose
+nose -> colore
+nose ->
+
+definicion por color para hacer la subida de informacion mas facil 
+colorcajaFuera ->   COMILLAS BOX_COLOR COMILLAS DOSPUNTOS COMILLA HEXADECIMAL COMILLA 
+
+colorCajaAlmacen -> COMILLA BOX_ON_TARGET_COLOR COMILLA DOSPUNTOS COMILLA HEXADECIMAL COMILLA 
+
+colorAlmacen ->     COMILLA TARGET_COLOR COMILLA DOSPUNTOS COMILLA HEXADECIMAL COMILLA 
+
+colorPared ->       COMILLAS BRICK_COLOR COMILLA DOSPUNTOS COMILLA HEXADECIMAL COMILLA 
+
+colorCamino ->      COMILLA HALL_COLOR COMILLA DOSPUNTOS COMILLA HEXADECIMAL COMILLA 
+
+noDefinido ->       COMILLA UNDEFINED_COLOR COMILLA DOSPUNTOS COMILLA HEXADECIMAL COMILLA 
+
+colorJugador ->     COMILLA UNDEFINED_COLOR COMILLA DOSPUNTOS COMILLA HEXADECIMAL COMILLA
+
+//decisiones para la el no terminal no se para que no se haga tan largo 
+colore ->   colorcajaFuera
+colore ->   colorCajaAlmacen
+colore ->   colorAlmacen
+colore ->   colorPared
+colore ->   colorCamino
+colore ->   noDefinido
+colore ->   colorJugador 
+*/
+
+// configuracion de entrada de casillas 
+
