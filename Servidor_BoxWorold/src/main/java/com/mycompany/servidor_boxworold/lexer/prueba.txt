@@ -1,6 +1,8 @@
 
 /*
-terminal COMILLAS DOSPUNTOS COMA NOMBRE FILA COLUMNA ID NUMERO  
+expresiones a convertir en cup 
+
+terminal COMILLAS DOSPUNTOS COMA NOMBRE FILA COLUMNA ID NUMERO  CORCHETEABIERTO CORCHETECERRADO
 no terminal inicio fin nombre col filas
 
 inicio ->   nombre  inicio
@@ -57,5 +59,67 @@ colore ->   noDefinido
 colore ->   colorJugador 
 */
 
+/*
 // configuracion de entrada de casillas 
+
+board -> COMILLA BOARD COMILLA DOSPUNTOS CORCHETEABIERTO algo corcheteCerrado
+
+algo ->  LLAVEABIERTA otraCosa LLAVECERRADA COMA algo
+algo ->  LLAVEABIERTA ontraCosa LLAVECERRADA
+
+posx -> COMILLA POSX COMILLA DOSPUNTOS opNum 
+posy -> COMILLA POSY COMILLA DOSPUNTOS opNum
+tipo -> COMILLA TYPE COMILLA DOSPUNTOS TIPO
+
+info -> posx
+info -> posy
+info -> tipo
+
+otraCosa -> info COMA otraCosa
+otraCosa -> otraCosa 
+
+opNum -> OPERACION 
+opNum -> NUMERO
+*/
+/*
+//opcon para cajas 
+boxes ->    COMILLA BOXES COMILLA DOSPUNTOS CORCHETEABIERTO infoCajas CORCHETECERRADO 
+
+infoCajas ->    LLAVEABIERTA infoExacta LLAVECERRADA COMA infoCajas
+infoCajas ->    LLAVEABIERTA infoExacta LLAVECERRADA 
+
+infoExacta ->  pos COMA infoExacta
+infoExacta ->  pos
+
+pos ->  COMILLA POSX COMILLA DOSPUNTOS opNum 
+pos ->  COMILLA POSY COMILLA DOSPUNTOS opNum
+*/
+
+// opcion para almacen parecido a las cajas pero con cambios de variable con copia y pegar aunque no estoy seguro xD 
+/*
+targets ->    COMILLA TARGETS COMILLA DOSPUNTOS CORCHETEABIERTO infotarjeta CORCHETECERRADO 
+
+infotarjeta ->    LLAVEABIERTA infoExactaTarjeta LLAVECERRADA COMA infotarjeta
+infotarjeta ->    LLAVEABIERTA infoExactaTarjeta LLAVECERRADA 
+
+infoExactaTarjeta ->  posTarjeta COMA infoExactaTarjeta
+infoExactaTarjeta ->  posTarjeta
+
+posTarjeta ->  COMILLA POSX COMILLA DOSPUNTOS opNum 
+posTarjeta ->  COMILLA POSY COMILLA DOSPUNTOS opNum
+*/
+
+// posicion de jugarod intentando hacer pruebas sin recurcion 
+/*
+ player -> COMILLA PLAYER COMILLA DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA
+
+ posJugador -> ePosJ COMILLA posJugador
+ posJugador -> ePosJ
+
+ posXJ ->   COMILLA POSX COMILLA DOSPUNTOS opNum
+ posYJ ->   COMILLA POSY COMILLA DOSPUNTOS opNum
+
+ ePosJ -> posXJ
+ ePosJ -> posYJ
+ */
 
