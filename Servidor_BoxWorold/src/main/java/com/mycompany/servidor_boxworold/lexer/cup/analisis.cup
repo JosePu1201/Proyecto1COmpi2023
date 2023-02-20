@@ -1,0 +1,87 @@
+import java_cup.runtime.*;
+import java.util.*;
+parser code {:
+
+:};
+//   
+ terminal COMILLAS, DOSPUNTOS, COMA, NOMBRE, FILA, COLUMNA, ID,  NUMERO, PLAYER_COLOR, HEXADECIMAL, LLAVEABIERTA, COLOR_JUGADOR, LLAVECERRADA, BRICK_COLOR, HALL_COLOR, UNDEFINED_COLOR, BOX_COLOR, BOX_ONT_TAGET_COLOR, TARGET_COLOR, 
+BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, TIPO, CONFIG, OPERACION;
+
+ non terminal inicio, fin , nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa, posx, posy,tipo, opNum,
+ info , board;
+//INICIO
+ inicio ::=     nombre1 inicio {::}  
+            |   filas inicio {::}
+            |   col inicio {::}
+            |   nombre1 {::}
+            |   filas {::}
+            |   col {::}
+            ;
+
+nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID COMILLAS COMA {::}
+            ;
+filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {::}
+            ;
+col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {::}
+            ;
+confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {::}
+        | {::}
+        ;
+
+// CONFIGURACIONS        
+nose    ::= colore COMA nose {::}
+        |   colore{::}
+        |   {::}
+        ;
+colorCajaFuera      ::=  COMILLAS BOX_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
+                    ;
+colorCajaAlmacen    ::= COMILLAS BOX_ONT_TAGET_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
+                    ;
+colorAlamacen       ::= COMILLAS TARGET_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
+                    ;
+colorPared          ::= COMILLAS BRICK_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
+                    ;
+colorCamino         ::= COMILLAS HALL_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS  {::}
+                    ;
+noDefinido          ::= COMILLAS UNDEFINED_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
+                    ;
+colorJugador        ::= COMILLAS COLOR_JUGADOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
+                    ;
+
+colore  ::= colorCajaFuera {::}
+        |   colorAlamacen {::}
+        |   colorCajaAlmacen {::}
+        |   colorPared {::}
+        |   colorCamino {::}
+        |   noDefinido {::}
+        |   colorJugador {::}
+        ;
+
+// POSICIONES DE PARED solucionar otra cosa
+
+
+board   ::= COMILLAS BOARD COMILLAS DOSPUNTOS CORCHETEABIERTO algo CORCHETECERRADO {::}
+        ;
+
+algo    ::=     LLAVEABIERTA otraCosa   LLAVECERRADA COMA algo {::}
+        |       LLAVEABIERTA otraCosa   LLAVECERRADA {::}
+        ;
+
+posx    ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
+        ;
+posy    ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum {::}
+        ;
+tipo    ::=     COMILLAS TYPE COMILLAS DOSPUNTOS TIPO {::}
+        ;
+
+info    ::= posx {::}
+        |   posy {::}
+        |   tipo {::}
+        ;
+
+otraCosa    ::= info COMA otraCosa {::}
+            |   info {::}
+            ;
+ opNum  ::= OPERACION {::}
+        |   NUMERO {::}
+        ;
