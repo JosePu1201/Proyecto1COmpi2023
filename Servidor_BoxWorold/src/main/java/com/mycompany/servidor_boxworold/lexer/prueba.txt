@@ -76,7 +76,9 @@ info -> posy
 info -> tipo
 
 otraCosa -> info COMA otraCosa
-otraCosa -> otraCosa 
+otraCosa -> info
+
+
 
 opNum -> OPERACION 
 opNum -> NUMERO

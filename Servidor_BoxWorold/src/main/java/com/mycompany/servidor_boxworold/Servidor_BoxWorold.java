@@ -3,7 +3,9 @@
  */
 package com.mycompany.servidor_boxworold;
 
-import com.mycompany.servidor_boxworold.lexer.Lexer;
+
+import com.mycompany.servidor_boxworold.Juego.Lexer;
+import com.mycompany.servidor_boxworold.Juego.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Reader;
@@ -42,7 +44,13 @@ public class Servidor_BoxWorold {
 		}
 
 		Reader adentro = new StringReader(algo);
-		Lexer nuevo = new Lexer(adentro);
-
+                Lexer nuevo = new Lexer(adentro);
+                parser nuevo1 = new parser(nuevo);
+                try {
+                    nuevo1.parse();
+                
+            } catch (Exception e) {
+                    System.out.println("no sale xD");
+            }
 	}
 }

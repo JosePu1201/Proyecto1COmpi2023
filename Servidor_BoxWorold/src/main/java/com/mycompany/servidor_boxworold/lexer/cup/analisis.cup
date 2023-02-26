@@ -1,37 +1,49 @@
+package com.mycompany.servidor_boxworold.Juego;
 import java_cup.runtime.*;
 import java.util.*;
 parser code {:
 
+
+	public String casteo(Object o){
+		String salida = "";
+			try{
+				salida = o.toString();
+			}
+			catch(Exception i){
+				salida = "Error";
+			}
+		return salida;
+	}
 :};
 //   
  terminal COMILLAS, DOSPUNTOS, COMA, NOMBRE, FILA, COLUMNA, ID,  NUMERO, PLAYER_COLOR, HEXADECIMAL, LLAVEABIERTA, COLOR_JUGADOR, LLAVECERRADA, BRICK_COLOR, HALL_COLOR, UNDEFINED_COLOR, BOX_COLOR, BOX_ONT_TAGET_COLOR, TARGET_COLOR, 
-BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, TIPO, CONFIG, OPERACION;
+BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, TIPO, CONFIG, OPERACION,TARGETS,PLAYER,DECIMAL, MAS, MENOS, DIAGNONAL,MULTIPLICAR,POTENCIA,PARENTESISCERRADO,PARENTESISABIERTO,RAIZ;
 
  non terminal inicio, fin , nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa, posx, posy,tipo, opNum,
- info , board;
+ info , board,targets, infoTarjeta, infoExactaTarjeta, posTarjeta, posJugador,ePosJ, posXJ,posYJ,player,a, b, c, d;
 //INICIO
- inicio ::=     nombre1 inicio {::}  
-            |   filas inicio {::}
-            |   col inicio {::}
-            |   nombre1 {::}
-            |   filas {::}
-            |   col {::}
+ inicio ::=     /*nombre1 inicio {:System.out.println("entra");:}  
+            |   filas inicio {:System.out.println("entra");:}
+            |   col inicio {:System.out.println("entra");:}*/
+            |   nombre1 {:System.out.println("entra");:}
+            |   filas {:System.out.println("entra");:}
+            |   col {:System.out.println("entra");:}
             ;
 
-nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID COMILLAS COMA {::}
+nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID:id COMILLAS COMA {:System.out.println(casteo(id));:}
             ;
-filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {::}
+filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {:System.out.println("entra");:}
             ;
-col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {::}
+col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {:System.out.println("entra");:}
             ;
-confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {::}
-        | {::}
+confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {:System.out.println("entra");:}
+        | {:System.out.println("entra");:}
         ;
 
 // CONFIGURACIONS        
 nose    ::= colore COMA nose {::}
         |   colore{::}
-        |   {::}
+        |   {::} 
         ;
 colorCajaFuera      ::=  COMILLAS BOX_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
                     ;
@@ -82,6 +94,66 @@ info    ::= posx {::}
 otraCosa    ::= info COMA otraCosa {::}
             |   info {::}
             ;
- opNum  ::= OPERACION {::}
-        |   NUMERO {::}
+ opNum  ::=     a {::}
+                |   NUMERO {::}
+                ;
+
+//guardado para almacen 
+
+targets ::=     COMILLAS TARGETS COMILLAS DOSPUNTOS CORCHETEABIERTO infoTarjeta CORCHETECERRADO {::}
         ;
+
+infoTarjeta     ::=     LLAVEABIERTA infoExactaTarjeta LLAVECERRADA COMA infoTarjeta {::}
+                |       LLAVEABIERTA infoExactaTarjeta LLAVECERRADA {::}
+                ;
+
+infoExactaTarjeta       ::=     posTarjeta COMA infoExactaTarjeta {::}
+                        |       posTarjeta {::}
+                        ;
+
+posTarjeta      ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
+                |       COMILLAS POSY COMILLAS DOSPUNTOS opNum {::}
+                ;
+
+//Posicion de jugador
+
+player  ::=     COMILLAS PLAYER COMILLAS DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA {::}
+        ;
+
+posJugador      ::=     ePosJ COMILLAS posJugador {::}
+                |       ePosJ {::}
+                ;
+
+posXJ   ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
+        ;
+
+posYJ   ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum {::}
+        ;
+
+ePosJ   ::=     posXJ {::}
+        |       posYJ {::}
+        ;
+
+
+//NUMERO
+a ::=   a:n1 MAS b:n2 {:/*RESULT = n1 + n2;*/  :}
+        | a:n1 MENOS b:n2 {: /*RESULT = n1 - n2; */:}
+        | b:n1 {: /*RESULT = n1; */:}
+        ;
+
+b ::=   b:n1 MULTIPLICAR c:n2 {: /*RESULT = n1 * n2;*/ :}
+        | b:n1 DIAGNONAL c:n2 {: /*RESULT = n1; */:}
+        | MENOS c:n1 {: /*RESULT = -1 * n1;*/ :}
+        | c:n1 {: /*RESULT = n1;*/ :}
+        ;
+
+c ::=   d:n1 POTENCIA c:n2 {: /*RESULT = (int) Math.pow(n1, n2);*/ :}
+        | d:n1 POTENCIA MENOS c:n2 {: /*RESULT = (int) Math.pow(n1, -1 * n2); */:}
+        | RAIZ PARENTESISABIERTO a:n1 PARENTESISCERRADO {: /*RESULT = (int) Math.sqrt(n1);*/ :}
+        | d:n1 {: /*RESULT = n1;*/ :}
+        ;
+
+d ::=   NUMERO:n1 {: /*RESULT = Integer.valueOf(n1.getValue());*/ :}
+        | PARENTESISABIERTO a:n1 PARENTESISCERRADO {: /*RESULT = n1;*/ :}
+        ;
+
