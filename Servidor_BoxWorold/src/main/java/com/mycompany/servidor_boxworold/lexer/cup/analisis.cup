@@ -17,57 +17,77 @@ parser code {:
 :};
 //   
  terminal COMILLAS, DOSPUNTOS, COMA, NOMBRE, FILA, COLUMNA, ID,  NUMERO, PLAYER_COLOR, HEXADECIMAL, LLAVEABIERTA, COLOR_JUGADOR, LLAVECERRADA, BRICK_COLOR, HALL_COLOR, UNDEFINED_COLOR, BOX_COLOR, BOX_ONT_TAGET_COLOR, TARGET_COLOR, 
-BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, TIPO, CONFIG, OPERACION,TARGETS,PLAYER,DECIMAL, MAS, MENOS, DIAGNONAL,MULTIPLICAR,POTENCIA,PARENTESISCERRADO,PARENTESISABIERTO,RAIZ;
+BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, TIPO, CONFIG, OPERACION,TARGETS,PLAYER,DECIMAL, MAS, MENOS, DIAGONAL,MULTIPLICAR,POTENCIA,PARENTESISCERRADO,PARENTESISABIERTO,RAIZ,TIPO1;
 
- non terminal inicio, fin , nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa, posx, posy,tipo, opNum,
- info , board,targets, infoTarjeta, infoExactaTarjeta, posTarjeta, posJugador,ePosJ, posXJ,posYJ,player,a, b, c, d;
+ non terminal inicio, desicion,fin , nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa, posx, posy,tipo, opNum,
+ info , board,targets, infoTarjeta, infoExactaTarjeta, posTarjeta, posJugador,ePosJ, posXJ,posYJ,player,a, b, c, d, decisiones,eHex,l;
 //INICIO
- inicio ::=     /*nombre1 inicio {:System.out.println("entra");:}  
-            |   filas inicio {:System.out.println("entra");:}
-            |   col inicio {:System.out.println("entra");:}*/
-            |   nombre1 {:System.out.println("entra");:}
-            |   filas {:System.out.println("entra");:}
-            |   col {:System.out.println("entra");:}
+ inicio ::= LLAVEABIERTA decisiones LLAVECERRADA{::}
+            ;
+//arreglar el tema de los numeros 
+nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID:id COMILLAS  {:System.out.println(casteo(id));:}
+            ;
+filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS opNum COMILLAS  {:System.out.println("entra fila");:}
+            ;
+col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS opNum COMILLAS  {:System.out.println("entra col");:}
             ;
 
-nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID:id COMILLAS COMA {:System.out.println(casteo(id));:}
-            ;
-filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {:System.out.println("entra");:}
-            ;
-col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS NUMERO COMILLAS COMA {:System.out.println("entra");:}
-            ;
+decisiones      ::=     decisiones COMA desicion {:System.out.println("entra a decidir **** ");:}
+                |       desicion {:System.out.println("entra a decidir final ");:}
+                ;
+
+desicion        ::=     nombre1 {::}
+                |       filas {::}
+                |       col  {::}
+                |       confi {:System.out.println("TERMINA config");:}
+                |       board  {:System.out.println("TERMINA board");:} 
+                |       targets {:System.out.println("targets");:}
+                |       player {:System.out.println("entra player");:}
+                ;
+
 confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {:System.out.println("entra");:}
-        | {:System.out.println("entra");:}
         ;
 
 // CONFIGURACIONS        
-nose    ::= colore COMA nose {::}
+nose    ::= nose COMA colore {:System.out.println("entra CON COMA?");:}
         |   colore{::}
-        |   {::} 
         ;
-colorCajaFuera      ::=  COMILLAS BOX_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
-                    ;
-colorCajaAlmacen    ::= COMILLAS BOX_ONT_TAGET_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
-                    ;
-colorAlamacen       ::= COMILLAS TARGET_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
-                    ;
-colorPared          ::= COMILLAS BRICK_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
-                    ;
-colorCamino         ::= COMILLAS HALL_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS  {::}
-                    ;
-noDefinido          ::= COMILLAS UNDEFINED_COLOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
-                    ;
-colorJugador        ::= COMILLAS COLOR_JUGADOR COMILLAS DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {::}
+        
+colore  ::=     colorCajaFuera {:System.out.println("entra y terina caja fuera ");:}
+        |       colorAlamacen {::}
+        |       colorCajaAlmacen {::}
+        |       colorPared {::}
+        |       colorCamino {::}
+        |       noDefinido {::}
+        |       colorJugador {::}
+        ;
+
+
+colorCajaFuera      ::=  COMILLAS BOX_COLOR COMILLAS  eHex {::}
                     ;
 
-colore  ::= colorCajaFuera {::}
-        |   colorAlamacen {::}
-        |   colorCajaAlmacen {::}
-        |   colorPared {::}
-        |   colorCamino {::}
-        |   noDefinido {::}
-        |   colorJugador {::}
+colorCajaAlmacen    ::= COMILLAS BOX_ONT_TAGET_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorAlamacen       ::= COMILLAS TARGET_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorPared          ::= COMILLAS BRICK_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorCamino         ::= COMILLAS HALL_COLOR COMILLAS  eHex  {::}
+                    ;
+
+noDefinido          ::= COMILLAS UNDEFINED_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorJugador        ::= COMILLAS COLOR_JUGADOR COMILLAS eHex {::}
+                    ;
+
+
+eHex    ::= DOSPUNTOS COMILLAS HEXADECIMAL:hexa COMILLAS {:System.out.println(casteo(hexa));:}
         ;
+
 
 // POSICIONES DE PARED solucionar otra cosa
 
@@ -81,9 +101,15 @@ algo    ::=     LLAVEABIERTA otraCosa   LLAVECERRADA COMA algo {::}
 
 posx    ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
         ;
+
 posy    ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum {::}
         ;
-tipo    ::=     COMILLAS TYPE COMILLAS DOSPUNTOS TIPO {::}
+
+tipo    ::=     l TIPO {:System.out.println("tipo1");:}
+        |       l TIPO1 {:System.out.println("tipo2");:}
+        ;
+
+l       ::=     COMILLAS TYPE COMILLAS DOSPUNTOS {:System.out.println("entra antes de elegir tipo");:}
         ;
 
 info    ::= posx {::}
@@ -91,12 +117,13 @@ info    ::= posx {::}
         |   tipo {::}
         ;
 
-otraCosa    ::= info COMA otraCosa {::}
+otraCosa    ::= otraCosa COMA info {::}
             |   info {::}
             ;
- opNum  ::=     a {::}
-                |   NUMERO {::}
-                ;
+
+ opNum  ::=    COMILLAS a COMILLAS {::}
+        |       a {::}
+        ;
 
 //guardado para almacen 
 
@@ -116,7 +143,6 @@ posTarjeta      ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
                 ;
 
 //Posicion de jugador
-
 player  ::=     COMILLAS PLAYER COMILLAS DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA {::}
         ;
 
@@ -134,7 +160,6 @@ ePosJ   ::=     posXJ {::}
         |       posYJ {::}
         ;
 
-
 //NUMERO
 a ::=   a:n1 MAS b:n2 {:/*RESULT = n1 + n2;*/  :}
         | a:n1 MENOS b:n2 {: /*RESULT = n1 - n2; */:}
@@ -142,7 +167,7 @@ a ::=   a:n1 MAS b:n2 {:/*RESULT = n1 + n2;*/  :}
         ;
 
 b ::=   b:n1 MULTIPLICAR c:n2 {: /*RESULT = n1 * n2;*/ :}
-        | b:n1 DIAGNONAL c:n2 {: /*RESULT = n1; */:}
+        | b:n1 DIAGONAL c:n2 {: /*RESULT = n1; */:}
         | MENOS c:n1 {: /*RESULT = -1 * n1;*/ :}
         | c:n1 {: /*RESULT = n1;*/ :}
         ;
@@ -156,4 +181,3 @@ c ::=   d:n1 POTENCIA c:n2 {: /*RESULT = (int) Math.pow(n1, n2);*/ :}
 d ::=   NUMERO:n1 {: /*RESULT = Integer.valueOf(n1.getValue());*/ :}
         | PARENTESISABIERTO a:n1 PARENTESISCERRADO {: /*RESULT = n1;*/ :}
         ;
-

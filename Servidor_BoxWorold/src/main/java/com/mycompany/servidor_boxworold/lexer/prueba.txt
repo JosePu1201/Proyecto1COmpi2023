@@ -125,3 +125,46 @@ posTarjeta ->  COMILLA POSY COMILLA DOSPUNTOS opNum
  ePosJ -> posYJ
  */
 
+
+
+confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {:System.out.println("entra");:}
+        ;
+
+// CONFIGURACIONS        
+nose    ::= nose COMA colore {:System.out.println("entra CON COMA?");:}
+        |   colore{::}
+        ;
+        
+colore  ::=     colorCajaFuera {:System.out.println("entra y terina caja fuera ");:}
+        |       colorAlamacen {::}
+        |       colorCajaAlmacen {::}
+        |       colorPared {::}
+        |       colorCamino {::}
+        |       noDefinido {::}
+        |       colorJugador {::}
+        ;
+
+
+colorCajaFuera      ::=  COMILLAS BOX_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorCajaAlmacen    ::= COMILLAS BOX_ONT_TAGET_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorAlamacen       ::= COMILLAS TARGET_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorPared          ::= COMILLAS BRICK_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorCamino         ::= COMILLAS HALL_COLOR COMILLAS  eHex  {::}
+                    ;
+
+noDefinido          ::= COMILLAS UNDEFINED_COLOR COMILLAS  eHex {::}
+                    ;
+
+colorJugador        ::= COMILLAS COLOR_JUGADOR COMILLAS eHex {::}
+                    ;
+
+
+eHex    ::= DOSPUNTOS COMILLAS HEXADECIMAL COMILLAS {:ystem.out.println(casteo(hexa));:}

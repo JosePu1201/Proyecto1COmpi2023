@@ -8,6 +8,7 @@ package com.mycompany.servidor_boxworold.Juego;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int DIAGONAL = 35;
   public static final int NUMERO = 9;
   public static final int DOSPUNTOS = 3;
   public static final int MULTIPLICAR = 36;
@@ -26,12 +27,12 @@ public class sym {
   public static final int TYPE = 26;
   public static final int RAIZ = 40;
   public static final int BOARD = 21;
+  public static final int TIPO1 = 41;
   public static final int ID = 8;
   public static final int HALL_COLOR = 16;
   public static final int EOF = 0;
   public static final int PLAYER = 31;
   public static final int DECIMAL = 32;
-  public static final int DIAGNONAL = 35;
   public static final int COMILLAS = 2;
   public static final int error = 1;
   public static final int COMA = 4;
@@ -85,12 +86,13 @@ public class sym {
   "DECIMAL",
   "MAS",
   "MENOS",
-  "DIAGNONAL",
+  "DIAGONAL",
   "MULTIPLICAR",
   "POTENCIA",
   "PARENTESISCERRADO",
   "PARENTESISABIERTO",
-  "RAIZ"
+  "RAIZ",
+  "TIPO1"
   };
 }
 
