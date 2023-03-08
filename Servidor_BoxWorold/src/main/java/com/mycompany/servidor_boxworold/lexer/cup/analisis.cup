@@ -1,4 +1,4 @@
-package com.mycompany.servidor_boxworold.Juego;
+package com.mycompany.servidor_boxworold.lexer.cup;
 import java_cup.runtime.*;
 import java.util.*;
 parser code {:
@@ -16,13 +16,14 @@ parser code {:
 	}
 :};
 //   
- terminal COMILLAS, DOSPUNTOS, COMA, NOMBRE, FILA, COLUMNA, ID,  NUMERO, PLAYER_COLOR, HEXADECIMAL, LLAVEABIERTA, COLOR_JUGADOR, LLAVECERRADA, BRICK_COLOR, HALL_COLOR, UNDEFINED_COLOR, BOX_COLOR, BOX_ONT_TAGET_COLOR, TARGET_COLOR, 
-BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, TIPO, CONFIG, OPERACION,TARGETS,PLAYER,DECIMAL, MAS, MENOS, DIAGONAL,MULTIPLICAR,POTENCIA,PARENTESISCERRADO,PARENTESISABIERTO,RAIZ,TIPO1;
+ terminal COMILLAS, DOSPUNTOS, COMA, NOMBRE, FILA, COLUMNA, ID,  NUMERO, HEXADECIMAL, LLAVEABIERTA, COLOR_JUGADOR, LLAVECERRADA, BRICK_COLOR, HALL_COLOR, UNDEFINED_COLOR, BOX_COLOR, BOX_ONT_TAGET_COLOR, TARGET_COLOR, 
+BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, CONFIG,TARGETS,PLAYER,DECIMAL, MAS, MENOS, DIAGONAL,MULTIPLICAR,POTENCIA,PARENTESISCERRADO,PARENTESISABIERTO,RAIZ,HALL,BRICK,BOXES;
 
- non terminal inicio, desicion,fin , nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa, posx, posy,tipo, opNum,
- info , board,targets, infoTarjeta, infoExactaTarjeta, posTarjeta, posJugador,ePosJ, posXJ,posYJ,player,a, b, c, d, decisiones,eHex,l;
+ non terminal inicio, desicion, nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa,tipo, opNum,
+ info , board,targets, algomas,infoTarjeta, infoExactaTarjeta, posTarjeta, posJugador,ePosJ, posXJ,posYJ,player,a, b, c, d, decisiones,eHex,l,pos,posEjes;
+non terminal tipo1,boxes,box,caja,posCaja;
 //INICIO
- inicio ::= LLAVEABIERTA decisiones LLAVECERRADA{::}
+ inicio ::= LLAVEABIERTA decisiones LLAVECERRADA{:System.out.println("termina todo :)");:}
             ;
 //arreglar el tema de los numeros 
 nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID:id COMILLAS  {:System.out.println(casteo(id));:}
@@ -43,6 +44,7 @@ desicion        ::=     nombre1 {::}
                 |       board  {:System.out.println("TERMINA board");:} 
                 |       targets {:System.out.println("targets");:}
                 |       player {:System.out.println("entra player");:}
+                |       boxes
                 ;
 
 confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {:System.out.println("entra");:}
@@ -88,45 +90,45 @@ colorJugador        ::= COMILLAS COLOR_JUGADOR COMILLAS eHex {::}
 eHex    ::= DOSPUNTOS COMILLAS HEXADECIMAL:hexa COMILLAS {:System.out.println(casteo(hexa));:}
         ;
 
-
 // POSICIONES DE PARED solucionar otra cosa
-
-
 board   ::= COMILLAS BOARD COMILLAS DOSPUNTOS CORCHETEABIERTO algo CORCHETECERRADO {::}
         ;
 
-algo    ::=     LLAVEABIERTA otraCosa   LLAVECERRADA COMA algo {::}
-        |       LLAVEABIERTA otraCosa   LLAVECERRADA {::}
+algo    ::=     algomas COMA algo {::}
+        |       algomas {::}
         ;
 
-posx    ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
-        ;
-
-posy    ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum {::}
-        ;
-
-tipo    ::=     l TIPO {:System.out.println("tipo1");:}
-        |       l TIPO1 {:System.out.println("tipo2");:}
-        ;
-
-l       ::=     COMILLAS TYPE COMILLAS DOSPUNTOS {:System.out.println("entra antes de elegir tipo");:}
-        ;
-
-info    ::= posx {::}
-        |   posy {::}
-        |   tipo {::}
+algomas ::=     LLAVEABIERTA otraCosa   LLAVECERRADA 
         ;
 
 otraCosa    ::= otraCosa COMA info {::}
             |   info {::}
             ;
+info    ::=     posEjes{::}
+        |       tipo
+        ;
+
+posEjes ::=     COMILLAS pos COMILLAS DOSPUNTOS opNum {::}
+        ;
+            
+pos     ::=     POSX
+        |       POSY  
+        ;
+tipo1   ::=     COMILLAS TYPE COMILLAS DOSPUNTOS
+        ;
+
+tipo    ::=   COMILLAS TYPE COMILLAS DOSPUNTOS COMILLAS l COMILLAS {:System.out.println("tipo1");:}
+        ;
+
+l       ::=     BRICK
+        |       HALL
+        ;
 
  opNum  ::=    COMILLAS a COMILLAS {::}
         |       a {::}
         ;
 
 //guardado para almacen 
-
 targets ::=     COMILLAS TARGETS COMILLAS DOSPUNTOS CORCHETEABIERTO infoTarjeta CORCHETECERRADO {::}
         ;
 
@@ -146,7 +148,7 @@ posTarjeta      ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
 player  ::=     COMILLAS PLAYER COMILLAS DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA {::}
         ;
 
-posJugador      ::=     ePosJ COMILLAS posJugador {::}
+posJugador      ::=     posJugador COMA  ePosJ {::}
                 |       ePosJ {::}
                 ;
 
@@ -160,6 +162,20 @@ ePosJ   ::=     posXJ {::}
         |       posYJ {::}
         ;
 
+//posicion de cajas 
+boxes   ::=     COMILLAS BOXES COMILLAS DOSPUNTOS CORCHETEABIERTO box   CORCHETECERRADO
+        ;
+
+box     ::=     box COMA caja 
+        |       caja
+        ;
+
+caja    ::=     LLAVEABIERTA posCaja LLAVECERRADA
+        ;
+
+posCaja ::=     posCaja COMA posEjes
+        |       posEjes
+        ;
 //NUMERO
 a ::=   a:n1 MAS b:n2 {:/*RESULT = n1 + n2;*/  :}
         | a:n1 MENOS b:n2 {: /*RESULT = n1 - n2; */:}

@@ -12,17 +12,17 @@ import java.util.ArrayList;
  */
 public class Mundo {
 
-	private String nombre;
-	private int filas;
-	private int columnas;
-	private String colorCajaFuera = "#ffff00";
-	private String colorCajasEnAlmacen = "#fe0002";
-	private String colorAlmace = "#d6fe0a";
-	private String colorPared = "#bdbebf";
-	private String colorCamino = "#0001ff";
-	private String colorLugarNoDefinido = "#303030";
-	private String colorJugador = "#ff00f7";
-	private Jugador jugador;
+	private ArrayList<String> nombre  = new ArrayList<>(); ;
+	private ArrayList<Integer> filas = new ArrayList<>();;
+	private ArrayList<Integer> columnas = new ArrayList<>();;
+	private ArrayList<String> colorCajaFuera  = new ArrayList<>();// "#ffff00";
+	private ArrayList<String> colorCajasEnAlmacen  = new ArrayList<>();// "#fe0002";
+	private ArrayList<String> colorAlmace  = new ArrayList<>();// "#d6fe0a";
+	private ArrayList<String> colorPared  = new ArrayList<>();// "#bdbebf";
+	private ArrayList<String> colorCamino  = new ArrayList<>();// "#0001ff";
+	private ArrayList<String> colorLugarNoDefinido  = new ArrayList<>();// "#303030";
+	private ArrayList<String> colorJugador  = new ArrayList<>();// "#ff00f7";
+	private ArrayList<Jugador> jugador1 = new ArrayList<>();;
 	private ArrayList<Caja> cajas = new ArrayList<>();
 	private ArrayList<Almacen> almacen = new ArrayList<>();
 	private ArrayList<Casillas> casillas = new ArrayList<>();
@@ -30,99 +30,95 @@ public class Mundo {
 	public Mundo() {
 	}
 
-	public Mundo(String nombre, int filas, int columnas) {
-		this.nombre = nombre;
-		this.filas = filas;
-		this.columnas = columnas;
-	}
+    public ArrayList<String> getNombre() {
+        return nombre;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setNombre(ArrayList<String> nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public ArrayList<Integer> getFilas() {
+        return filas;
+    }
 
-	public int getFilas() {
-		return filas;
-	}
+    public void setFilas(ArrayList<Integer> filas) {
+        this.filas = filas;
+    }
 
-	public void setFilas(int filas) {
-		this.filas = filas;
-	}
+    public ArrayList<Integer> getColumnas() {
+        return columnas;
+    }
 
-	public int getColumnas() {
-		return columnas;
-	}
+    public void setColumnas(ArrayList<Integer> columnas) {
+        this.columnas = columnas;
+    }
 
-	public void setColumnas(int columnas) {
-		this.columnas = columnas;
-	}
+    public ArrayList<String> getColorCajaFuera() {
+        return colorCajaFuera;
+    }
 
-	public String getColorCajaFuera() {
-		return colorCajaFuera;
-	}
+    public void setColorCajaFuera(ArrayList<String> colorCajaFuera) {
+        this.colorCajaFuera = colorCajaFuera;
+    }
 
-	public void setColorCajaFuera(String colorCajaFuera) {
-		this.colorCajaFuera = colorCajaFuera;
-	}
+    public ArrayList<String> getColorCajasEnAlmacen() {
+        return colorCajasEnAlmacen;
+    }
 
-	public String getColorCajasEnAlmacen() {
-		return colorCajasEnAlmacen;
-	}
+    public void setColorCajasEnAlmacen(ArrayList<String> colorCajasEnAlmacen) {
+        this.colorCajasEnAlmacen = colorCajasEnAlmacen;
+    }
 
-	public void setColorCajasEnAlmacen(String colorCajasEnAlmacen) {
-		this.colorCajasEnAlmacen = colorCajasEnAlmacen;
-	}
+    public ArrayList<String> getColorAlmace() {
+        return colorAlmace;
+    }
 
-	public String getColorAlmace() {
-		return colorAlmace;
-	}
+    public void setColorAlmace(ArrayList<String> colorAlmace) {
+        this.colorAlmace = colorAlmace;
+    }
 
-	public void setColorAlmace(String colorAlmace) {
-		this.colorAlmace = colorAlmace;
-	}
+    public ArrayList<String> getColorPared() {
+        return colorPared;
+    }
 
-	public String getColorPared() {
-		return colorPared;
-	}
+    public void setColorPared(ArrayList<String> colorPared) {
+        this.colorPared = colorPared;
+    }
 
-	public void setColorPared(String colorPared) {
-		this.colorPared = colorPared;
-	}
+    public ArrayList<String> getColorCamino() {
+        return colorCamino;
+    }
 
-	public String getColorCamino() {
-		return colorCamino;
-	}
+    public void setColorCamino(ArrayList<String> colorCamino) {
+        this.colorCamino = colorCamino;
+    }
 
-	public void setColorCamino(String colorCamino) {
-		this.colorCamino = colorCamino;
-	}
+    public ArrayList<String> getColorLugarNoDefinido() {
+        return colorLugarNoDefinido;
+    }
 
-	public String getColorLugarNoDefinido() {
-		return colorLugarNoDefinido;
-	}
+    public void setColorLugarNoDefinido(ArrayList<String> colorLugarNoDefinido) {
+        this.colorLugarNoDefinido = colorLugarNoDefinido;
+    }
 
-	public void setColorLugarNoDefinido(String colorLugarNoDefinido) {
-		this.colorLugarNoDefinido = colorLugarNoDefinido;
-	}
+    public ArrayList<String> getColorJugador() {
+        return colorJugador;
+    }
 
-	public String getColorJugador() {
-		return colorJugador;
-	}
+    public void setColorJugador(ArrayList<String> colorJugador) {
+        this.colorJugador = colorJugador;
+    }
 
-	public void setColorJugador(String colorJugador) {
-		this.colorJugador = colorJugador;
-	}
+    public ArrayList<Jugador> getJugador() {
+        return jugador1;
+    }
 
-	public Jugador getJugador() {
-		return jugador;
-	}
+    public void setJugador(ArrayList<Jugador> jugador) {
+        this.jugador1 = jugador;
+    }
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
-	}
+
 
 	public ArrayList<Caja> getCajas() {
 		return cajas;
@@ -149,6 +145,7 @@ public class Mundo {
 	}
 
 	public String posCajas() {
+           
 		String info = "";
 		for (Caja caja : cajas) {
 			info = info + "<boxes>\n"
@@ -170,7 +167,7 @@ public class Mundo {
 		return info;
 	}
 
-	public String posJugador() {
+	public String posJugador(Jugador jugador) {
 		String info = "";
 		info = info + "<player>\n"
 			+ "\t<posX>" + jugador.getPosX() + "</posX>\n"
@@ -191,6 +188,7 @@ public class Mundo {
 		return info;
 	}
 	public String xml(){
+             Jugador jugador = new Jugador(0, 0, "o");
 		String salida =  "\t<worolds>\n"
 			+ "\t\t<name>"+nombre+"</name>\n"
 			+ "\t\t<rows>"+filas+"</rows>\n"
@@ -207,7 +205,7 @@ public class Mundo {
 			+"\t\t"+posCasilla()
 			+"\t\t"+posCajas()
 			+"\t\t"+posAlmacen()
-			+"\t\t"+posJugador()
+			+"\t\t"+posJugador(jugador)
 			+"\t</worolds>\n";
 		return salida;
 	}

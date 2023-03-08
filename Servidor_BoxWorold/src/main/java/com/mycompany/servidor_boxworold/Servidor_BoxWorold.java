@@ -4,8 +4,9 @@
 package com.mycompany.servidor_boxworold;
 
 
-import com.mycompany.servidor_boxworold.Juego.Lexer;
-import com.mycompany.servidor_boxworold.Juego.parser;
+import com.mycompany.servidor_boxworold.*;
+import com.mycompany.servidor_boxworold.lexer.Lexer;
+import com.mycompany.servidor_boxworold.lexer.cup.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Reader;
