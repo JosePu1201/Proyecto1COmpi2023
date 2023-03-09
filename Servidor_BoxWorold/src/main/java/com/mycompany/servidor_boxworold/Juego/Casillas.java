@@ -9,38 +9,47 @@ package com.mycompany.servidor_boxworold.Juego;
  * @author jose
  */
 public class Casillas {
-	private int posX;
-	private int posY;
-	private String tipo;
 
-	public Casillas(int posX, int posY, String tipo) {
-		this.posX = posX;
-		this.posY = posY;
-		this.tipo = tipo;
-	}
+    private int posX;
+    private int posY;
+    private String tipo;
 
-	public int getPosX() {
-		return posX;
-	}
+    public Casillas(int posX, int posY, String tipo) {
+        this.posX = posX;
+        this.posY = posY;
+        this.tipo = tipo;
+    }
 
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
+    public Casillas() {
+    }
 
-	public int getPosY() {
-		return posY;
-	}
+    public int getPosX() {
+        return posX;
+    }
 
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    public int getPosY() {
+        return posY;
+    }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-	
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Casillas{" + "posX=" + posX + ", posY=" + posY + ", tipo=" + tipo + '}';
+    }
+
 }
