@@ -379,6 +379,8 @@ public class parser extends java_cup.runtime.lr_parser {
             mundoTemp.setJugador(jugador1);
             mundoTemp.setNombre(nombre);
             mundoTemp.setCasillas(casillas);
+            imprimir();
+            mundoTemp.imprimir();
         }
         public int castEntero(Object a){
                 int num = -1;

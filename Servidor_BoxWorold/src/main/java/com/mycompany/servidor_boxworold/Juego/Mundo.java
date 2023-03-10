@@ -29,6 +29,10 @@ public class Mundo {
 
 	public Mundo() {
 	}
+        
+        public void imprimir(){
+            System.err.println(xml(jugador1.get(0)));
+        }
 
     public ArrayList<String> getNombre() {
         return nombre;
@@ -148,10 +152,10 @@ public class Mundo {
            
 		String info = "";
 		for (Caja caja : cajas) {
-			info = info + "<boxes>\n"
-				+ "\t<posX>" + caja.getPosX() + "</posX>\n"
-				+ "\t<posY>" + caja.getPosY() + "</posY>\n"
-				+ "</boxes>\n";
+			info = info + "\t\t<boxes>\n"
+				+ "\t\t\t<posX>" + caja.getPosX() + "</posX>\n"
+				+ "\t\t\t<posY>" + caja.getPosY() + "</posY>\n"
+				+ "\t\t</boxes>\n";
 		}
 		return info;
 	}
@@ -159,53 +163,52 @@ public class Mundo {
 	public String posAlmacen() {
 		String info = "";
 		for (Almacen caja : almacen) {
-			info = info + "<targets>\n"
-				+ "\t<posX>" + caja.getPosX() + "</posX>\n"
-				+ "\t<posY>" + caja.getPosY() + "</posY>\n"
-				+ "</targets>\n";
+			info = info + "\t\t<targets>\n"
+				+ "\t\t\t<posX>" + caja.getPosX() + "</posX>\n"
+				+ "\t\t\t<posY>" + caja.getPosY() + "</posY>\n"
+				+ "\t\t</targets>\n";
 		}
 		return info;
 	}
 
 	public String posJugador(Jugador jugador) {
 		String info = "";
-		info = info + "<player>\n"
-			+ "\t<posX>" + jugador.getPosX() + "</posX>\n"
-			+ "\t<posY>" + jugador.getPosY() + "<posY>\n"
-			+ "</player>\n";
+		info = info + "\t\t<player>\n"
+			+ "\t\t\t<posX>" + jugador.getPosX() + "</posX>\n"
+			+ "\t\t\t<posY>" + jugador.getPosY() + "<posY>\n"
+			+ "\t\t</player>\n";
 
 		return info;
 	}
 	public String posCasilla(){
 		String info = "";
 		for (Casillas caja : casillas) {
-			info = info +"<board>\n"
-				+ "\t<posX>"+caja.getPosX()+"</posX>\n"
-				+ "\t<posY>"+caja.getPosY()+"</posY>\n"
-				+ "\t<type>"+caja.getTipo()+"</type>\n"
-				+ "</board>\n";
+			info = info +"\t\t<board>\n"
+				+ "\t\t\t<posX>"+caja.getPosX()+"</posX>\n"
+				+ "\t\t\t<posY>"+caja.getPosY()+"</posY>\n"
+				+ "\t\t\t<type>"+caja.getTipo()+"</type>\n"
+				+ "\t\t</board>\n";
 		}
 		return info;
 	}
-	public String xml(){
-             Jugador jugador = new Jugador(0, 0, "o");
+	public String xml(Jugador jugador){            
 		String salida =  "\t<worolds>\n"
-			+ "\t\t<name>"+nombre+"</name>\n"
-			+ "\t\t<rows>"+filas+"</rows>\n"
-			+ "\t\t<cols>"+columnas+"</cols>\n"
+			+ "\t\t<name>"+nombre.get(0)+"</name>\n"
+			+ "\t\t<rows>"+filas.get(0)+"</rows>\n"
+			+ "\t\t<cols>"+columnas.get(0)+"</cols>\n"
 			+"\t\t<config>\n"
-			+"<\t\t\tbox_color>"+colorCajaFuera+"</box_color>\n"
-			+"<\t\t\tbox_on_target_color>"+colorCajasEnAlmacen+"</box_on_target_color>\n"
-			+"<\t\t\ttarget_color>"+colorAlmace+"</target_color>\n"
-			+"<\t\t\tbrick_color>"+colorPared+"</brick_color>\n"
-			+"<\t\t\thall_color>"+colorCamino+"</hall_color>\n"
-			+"<\t\t\tundefined_color>"+colorLugarNoDefinido+"</undefined_color>\n"
-			+"<\t\t\tplayer_color>"+colorJugador+"</player_color>\n"
+			+"\t\t\t<box_color>"+colorCajaFuera.get(0)+"</box_color>\n"
+			+"\t\t\t<box_on_target_color>"+colorCajasEnAlmacen.get(0)+"</box_on_target_color>\n"
+			+"\t\t\t<target_color>"+colorAlmace.get(0)+"</target_color>\n"
+			+"\t\t\t<brick_color>"+colorPared.get(0)+"</brick_color>\n"
+			+"\t\t\t<hall_color>"+colorCamino.get(0)+"</hall_color>\n"
+			+"\t\t\t<undefined_color>"+colorLugarNoDefinido.get(0)+"</undefined_color>\n"
+			+"\t\t\t<player_color>"+colorJugador.get(0)+"</player_color>\n"
 			+"\t\t</config>\n"
-			+"\t\t"+posCasilla()
-			+"\t\t"+posCajas()
-			+"\t\t"+posAlmacen()
-			+"\t\t"+posJugador(jugador)
+			+posCasilla()
+			+posCajas()
+			+posAlmacen()
+			+posJugador(jugador)
 			+"\t</worolds>\n";
 		return salida;
 	}
