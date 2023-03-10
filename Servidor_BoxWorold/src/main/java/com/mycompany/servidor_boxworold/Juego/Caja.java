@@ -10,6 +10,10 @@ package com.mycompany.servidor_boxworold.Juego;
  */
 public class Caja extends Casillas{
 	private String nombre = "Caja";
+
+        public Caja() {
+        }
+        
 	public Caja(int posX, int posY, String tipo) {
 		super(posX, posY, tipo);
 	}
@@ -21,5 +25,11 @@ public class Caja extends Casillas{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+    @Override
+    public String toString() {
+        return "Caja{" + "nombre=" + nombre +  " posX: "+getPosX()+" posY"+getPosY()+'}';
+    }
+        
 	
 }

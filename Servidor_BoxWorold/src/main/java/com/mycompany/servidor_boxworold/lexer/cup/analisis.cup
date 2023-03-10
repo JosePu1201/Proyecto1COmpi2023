@@ -18,11 +18,30 @@ parser code {:
 	public ArrayList<Caja> cajas = new ArrayList<>();
 	public ArrayList<Almacen> almacen = new ArrayList<>();
 	public ArrayList<Casillas> casillas = new ArrayList<>();
-        
-        Casillas casillaTemp = new Casillas();
+        public Mundo mundoTemp = new Mundo();
 
+        Casillas casillaTemp = new Casillas();
+        Caja cajaTemp = new Caja();
+        Almacen almacenTemo = new Almacen();
+        Jugador jugadorTemp = new Jugador();
+        public void set(){
+            mundoTemp.setAlmacen(almacen);
+            mundoTemp.setCajas(cajas);
+            mundoTemp.setColorAlmace(colorAlmace);
+            mundoTemp.setColorCajaFuera(colorCajaFuera);
+            mundoTemp.setColorCajasEnAlmacen(colorCajasEnAlmacen);
+            mundoTemp.setColorCamino(colorCamino);
+            mundoTemp.setColorJugador(colorJugador);
+            mundoTemp.setColorLugarNoDefinido(colorLugarNoDefinido);
+            mundoTemp.setColorPared(colorPared);
+            mundoTemp.setColumnas(columnas);
+            mundoTemp.setFilas(filas);
+            mundoTemp.setJugador(jugador1);
+            mundoTemp.setNombre(nombre);
+            mundoTemp.setCasillas(casillas);
+        }
         public int castEntero(Object a){
-                int num = 999999;
+                int num = -1;
                       	try{
 				double numa = Double.parseDouble(casteo(a));
                                 num = (int) numa;
@@ -31,6 +50,46 @@ parser code {:
                                 System.out.println("no se pudo y l");              
 			}  
                 return num;
+        }
+                public void imprimir(){
+            imprimirArray(nombre);
+            imprimirArray(colorCajaFuera);
+            imprimirArray(colorCajasEnAlmacen);
+            imprimirArray(colorAlmace);
+            imprimirArray(colorPared);
+            imprimirArray(colorCamino);
+            imprimirArray(colorLugarNoDefinido);
+            imprimirArray(colorJugador);
+            imprimirInteger(filas);
+            imprimirInteger(columnas);
+            
+            for (Jugador object : jugador1) {
+                    System.err.println(object.toString());
+            }
+            for (Caja caja : cajas) {
+                System.err.println(caja.toString());
+            }
+            for (Almacen almacen1 : almacen) {
+                System.err.println(almacen1.toString());
+            }
+            for (Casillas casilla : casillas) {
+                System.err.println(casilla.toString());
+            }
+            
+        }
+        public void imprimirInteger(ArrayList<Integer> entrada){
+                for (
+                        Integer object : entrada) {
+                        System.out.println(object);
+                }
+
+        }
+        public void imprimirArray(ArrayList<String> entrada){
+        
+            for (String object : entrada) {
+                System.out.println(object);
+            }
+            
         }
 	public String casteo(Object o){
 		String salida = "";
@@ -74,41 +133,41 @@ BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, CONFIG,TARGETS,PLAYER,
 
  non terminal inicio, desicion, nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa,tipo, opNum,
  info , board,targets, algomas,infoTarjeta, infoExactaTarjeta, posTarjeta, posJugador,ePosJ, posXJ,posYJ,player,a, b, c, d, decisiones,eHex,l,pos,posEjes;
-non terminal tipo1,boxes,box,caja,posCaja;
+non terminal tipo1,boxes,box,caja,posCaja,estruct1,posEjes1;
 //INICIO
- inicio ::= LLAVEABIERTA decisiones LLAVECERRADA{::}
+ inicio ::= LLAVEABIERTA decisiones LLAVECERRADA{:/*imprimir();*/set();:}
             ;
 //arreglar el tema de los numeros 
 nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID:id COMILLAS  {:nombre.add(casteo(id));:}
             ;
-filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS opNum:numero COMILLAS  {:filas.add(casteoInteger(numero));:}
+filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS opNum:numero COMILLAS  {:filas.add(castEntero(numero));:}
             ;
-col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS opNum:numero COMILLAS  {:columnas.add(casteoInteger(numero));:}
+col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS opNum:numero COMILLAS  {:columnas.add(castEntero(numero));:}
             ;
 
 decisiones      ::=     decisiones COMA desicion {::}
                 |       desicion {::}
                 ;
 
-desicion        ::=     nombre1 {::}
-                |       filas {::}
-                |       col  {::}
-                |       confi {::}
-                |       board  {::} 
-                |       targets {::}
-                |       player {::}
-                |       boxes
+desicion        ::=     nombre1 {:System.out.println("nombre");:}
+                |       filas {:System.out.println("filas");:}
+                |       col  {:System.out.println("columnas");:}
+                |       confi {:System.out.println("confi");:}
+                |       board  {:System.out.println("board");:} 
+                |       targets {:System.out.println("targets");:}
+                |       player {:System.out.println("player");:}
+                |       boxes   {:System.out.println("boxes");:}
                 ;
 
-confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {:System.out.println("entra");:}
+confi   ::=  COMILLAS CONFIG COMILLAS DOSPUNTOS LLAVEABIERTA nose LLAVECERRADA {::}
         ;
 
 // CONFIGURACIONS        
-nose    ::= nose COMA colore {:System.out.println("entra CON COMA?");:}
+nose    ::= nose COMA colore {::}
         |   colore{::}
         ;
         
-colore  ::=     colorCajaFuera {:System.out.println("entra y terina caja fuera ");:}
+colore  ::=     colorCajaFuera {::}
         |       colorAlamacen {::}
         |       colorCajaAlmacen {::}
         |       colorPared {::}
@@ -151,7 +210,8 @@ algo    ::=     algomas COMA algo {::}
         |       algomas {::}
         ;
 
-algomas ::=     LLAVEABIERTA otraCosa   LLAVECERRADA {:System.out.println(casillaTemp.toString());:}
+algomas ::=     LLAVEABIERTA otraCosa   LLAVECERRADA {:casillas.add(casillaTemp);
+                                                        casillaTemp = new Casillas();:}
         ;
 
 otraCosa    ::= otraCosa COMA info {::}
@@ -171,8 +231,8 @@ tipo1   ::=     COMILLAS TYPE COMILLAS DOSPUNTOS
 tipo    ::=   COMILLAS TYPE COMILLAS DOSPUNTOS COMILLAS l COMILLAS {::}
         ;
 
-l       ::=     BRICK
-        |       HALL
+l       ::=     BRICK:tip{:casillaTemp.setTipo(casteo(tip));:}
+        |       HALL:tip{:casillaTemp.setTipo(casteo(tip));:}
         ;
 
  opNum  ::=    COMILLAS a:n1 COMILLAS {:RESULT = (double)n1;:}
@@ -183,30 +243,35 @@ l       ::=     BRICK
 targets ::=     COMILLAS TARGETS COMILLAS DOSPUNTOS CORCHETEABIERTO infoTarjeta CORCHETECERRADO {::}
         ;
 
-infoTarjeta     ::=     LLAVEABIERTA infoExactaTarjeta LLAVECERRADA COMA infoTarjeta {::}
-                |       LLAVEABIERTA infoExactaTarjeta LLAVECERRADA {::}
+infoTarjeta     ::=     estruct1 COMA infoTarjeta {::}
+                |       estruct1 {::}
+                ;
+
+estruct1        ::=      LLAVEABIERTA infoExactaTarjeta LLAVECERRADA {:almacen.add(almacenTemo);
+                        almacenTemo = new Almacen();:}
                 ;
 
 infoExactaTarjeta       ::=     posTarjeta COMA infoExactaTarjeta {::}
                         |       posTarjeta {::}
                         ;
 
-posTarjeta      ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
-                |       COMILLAS POSY COMILLAS DOSPUNTOS opNum {::}
+posTarjeta      ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum:num {:almacenTemo.setPosX(castEntero(num));:}
+                |       COMILLAS POSY COMILLAS DOSPUNTOS opNum:num {:almacenTemo.setPosY(castEntero(num));:}
                 ;
 
 //Posicion de jugador
-player  ::=     COMILLAS PLAYER COMILLAS DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA {::}
+player  ::=     COMILLAS PLAYER COMILLAS DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA {:jugador1.add(jugadorTemp);
+                jugadorTemp = new Jugador();:}
         ;
 
 posJugador      ::=     posJugador COMA  ePosJ {::}
                 |       ePosJ {::}
                 ;
 
-posXJ   ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum {::}
+posXJ   ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum:num {:jugadorTemp.setPosX(castEntero(num));:}
         ;
 
-posYJ   ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum {::}
+posYJ   ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum:num {:jugadorTemp.setPosY(castEntero(num));:}
         ;
 
 ePosJ   ::=     posXJ {::}
@@ -221,12 +286,16 @@ box     ::=     box COMA caja
         |       caja
         ;
 
-caja    ::=     LLAVEABIERTA posCaja LLAVECERRADA
+caja    ::=     LLAVEABIERTA posCaja LLAVECERRADA {:cajas.add(cajaTemp);
+        cajaTemp = new Caja();:}
         ;
 
-posCaja ::=     posCaja COMA posEjes
-        |       posEjes
+posCaja ::=     posCaja COMA posEjes1
+        |       posEjes1
         ;
+posEjes1        ::=     COMILLAS POSX:posxx COMILLAS DOSPUNTOS opNum:n1 {:cajaTemp.setPosX(castEntero(n1));:}
+                |       COMILLAS POSY:posyy COMILLAS DOSPUNTOS opNum:n1 {:cajaTemp.setPosY(castEntero(n1));:}
+                ;
 //NUMERO
 a ::=   a:n1 MAS b:n2 {:RESULT = (double)n1 +(double) n2;  :}
         | a:n1 MENOS b:n2 {: RESULT = (double)n1 - (double)n2; :}
