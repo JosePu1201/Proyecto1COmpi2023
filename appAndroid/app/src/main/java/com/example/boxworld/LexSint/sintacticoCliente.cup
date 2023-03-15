@@ -1,4 +1,4 @@
-package com.mycompany.servidor_boxworold.Grafico.CupCliente;
+  package com.example.boxworld.LexSint;
 import java_cup.runtime.*;
 import java.util.*;
 

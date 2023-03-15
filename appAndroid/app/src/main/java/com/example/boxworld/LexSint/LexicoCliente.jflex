@@ -1,6 +1,7 @@
-    package com.mycompany.servidor_boxworold.Grafico.LexerCliente;
+    package com.example.boxworld.LexSint;
+    package com.example.boxworld.LexSint.sym;
     import com.mycompany.servidor_boxworold.Grafico.CupCliente.sym;
-    import java_cup.runtime.*;      
+    import java_cup.runtime.*;
 
 %%
     //config de jflex
@@ -12,7 +13,7 @@
 %standalone
 %cup
 %eofval{
-  return new Symbol(<EOF);
+  return new Symbol(EOF);
 %eofval}
 %eofclose
 
