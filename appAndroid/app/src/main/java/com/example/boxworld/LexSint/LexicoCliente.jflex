@@ -36,7 +36,7 @@ floor = "FLOOR"
 potencia = "^"
 raiz = "SQRT"
 
-comentario = [numeral][[a-zA-Z]|["\t"]|[" "]|[0-9]]*
+comentario = [numeral][[a-zA-Z]|[" "]|[0-9]]*
 LineTerminator = \n|\r|\n\r 
 WhiteSpace = {LineTerminator}|[ \t\f]|[" "]
 integer = 0|[1-9][0-9]*

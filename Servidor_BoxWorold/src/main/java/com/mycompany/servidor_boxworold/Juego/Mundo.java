@@ -27,6 +27,7 @@ public class Mundo {
     private ArrayList<Almacen> almacen = new ArrayList<>();
     private ArrayList<Casillas> casillas = new ArrayList<>();
     private ArrayList<Errores> errores = new ArrayList<>();
+    private String xml;
 
     public Mundo() {
     }
@@ -37,6 +38,8 @@ public class Mundo {
 
     public boolean validacion() {
         boolean val = true;
+        System.err.println("Entra a validar");
+        System.out.println("la validacion de esto es: "+jugador1.size());
         if (jugador1.size() > 2) {
             agregaDes("Semantigo", "Solo se puede definir la posicion del jugador una vez");
         }
@@ -104,6 +107,22 @@ public class Mundo {
         }
 
         return val;
+    }
+    public void returnWorold(){
+        if(validacion()){
+            xml = xml(jugador1.get(0));
+            imprimir();
+        }
+        else{
+            System.err.println("Algo salio mal ");
+        }
+    }
+    public String getXml() {
+        return xml;
+    }
+
+    public void setXml(String xml) {
+        this.xml = xml;
     }
 
     public void imprimir() {

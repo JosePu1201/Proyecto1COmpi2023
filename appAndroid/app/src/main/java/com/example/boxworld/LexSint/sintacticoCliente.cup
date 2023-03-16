@@ -1,11 +1,10 @@
   package com.example.boxworld.LexSint;
 import java_cup.runtime.*;
 import java.util.*;
+import com.example.boxworld.Mov.*;
 
 parser code {:
-
-	/*
-	public String casteo(Object o){
+	public String texto(Object o){
 		String salida = "";
 			try{
 				salida = o.toString();
@@ -14,7 +13,20 @@ parser code {:
 				salida = "Error";
 			}
 		return salida;
-	}*/
+	}
+        public double casteoNumero(Object num) {
+                double numero = 0;
+                try {
+                        String numeroE = num.toString();
+                        numero = Double.parseDouble(numeroE);
+                } catch (Exception i) {
+                        System.err.println("error");
+                }
+
+                return numero;
+
+        }
+
 :};
 terminal UP,PARENTESISABIERTO,PARENTESISCERRADO,NUMERO,RIGHT,PUSH,CEIL,FLOOR,PUNTOYCOMA,DOWN,SUMA,RESTA,MULTI,DIV,POTENCIA,RAIZ,LEFT,DECIMAL;
 
@@ -23,34 +35,68 @@ non terminal inicio,inicio1,up,down,left1,right1,push,opNumero,opDireccion,entra
 inicio	::=	inicioAprox{:System.out.println("termina mas de uno xD");:}
 		;
 inicioAprox	::=	inicioAprox inicio1 
-			|	inicio1
-			;
+		|	inicio1
+		;
 
 inicio1	::=	mov {::}
-		|	push
-		;
+	|	push {::}
+	;
 
-direccion	::=	UP 
-			|	DOWN
-			|	LEFT
-			|	RIGHT
+direccion	::=	UP:sal {:RESULT = sal;:}
+			|	DOWN:sal {:RESULT = sal;:}
+			|	LEFT:sal {:RESULT = sal;:}
+			|	RIGHT:sal {:RESULT = sal;:}
 			;
 	
-mov	  	::= direccion entrada {::}
+mov	  	::= direccion:dir entrada:num {:
+                if(texto(dir).equals("up")){
+                        System.out.println("up");}
+                else if(texto(dir).equals("down")){
+                        System.out.println("down");        
+                }
+                else if(texto(dir).equals("left")){
+                        System.out.println("left");
+                }
+                else if(texto(dir).equals("right")){
+                        System.out.println("right");
+                }:}
     	;
 
-entrada ::=	PARENTESISABIERTO NUMERO PARENTESISCERRADO PUNTOYCOMA
+entrada ::=	PARENTESISABIERTO opNumero:num PARENTESISCERRADO PUNTOYCOMA {:RESULT = num;:}
 		;
 	
 
-push	::= PUSH direccion entrada {::}
+push	::= PUSH direccion:dir entrada:num {:Push push = new Pus(texto(dir),casteoNumero(num));:}
 		;
 
-opNumero	::= FLOOR PARENTESISABIERTO a PARENTESISCERRADO {::}{::}
-			|	CEIL PARENTESISABIERTO a PARENTESISCERRADO {::}
-			|	a 
+opNumero	::= FLOOR PARENTESISABIERTO a:num PARENTESISCERRADO {:RESULT = (double)num;:}
+			|	CEIL PARENTESISABIERTO a:num PARENTESISCERRADO {:RESULT = (double)num;:}
+			|	a:num {:RESULT = (double)num;:} 
         	;
 
+a ::=   a:n1 SUMA b:n2 {:RESULT = (double)n1 +(double) n2;  :}
+        | a:n1 RESTA b:n2 {: RESULT = (double)n1 - (double)n2; :}
+        | b:n1 {: RESULT = n1; :}
+        ;
+
+b ::=   b:n1 MULTI c:n2 {: RESULT = (double)n1 * (double)n2; :}
+        | b:n1 DIV c:n2 {: RESULT = (double)n1/(double)n2; :}
+        | RESTA c:n1 {: RESULT = -1 *(double) n1; :}
+        | c:n1 {: RESULT = (double)n1; :}
+        ;
+
+c ::=   d:n1 POTENCIA c:n2 {: :}
+        | d:n1 POTENCIA RESTA c:n2 {: :}
+        | RAIZ PARENTESISABIERTO a:n1 PARENTESISCERRADO {::}
+        | d:n1 {: RESULT = (double)n1; :}
+        ;
+
+d ::=   NUMERO:n1 {: RESULT = Double.valueOf(n1.toString());:}
+        | DECIMAL:n1 {:RESULT = Double.valueOf(n1.toString());:}       
+        | PARENTESISABIERTO a:n1 PARENTESISCERRADO {: RESULT = (double)n1; :}
+        ;
+
+/* 
 a ::=   a SUMA b {::}
         | a RESTA b {::}
         | b {::}
@@ -71,5 +117,4 @@ c ::=   d POTENCIA c {::}
 d ::=   NUMERO {::}
         | PARENTESISABIERTO a PARENTESISCERRADO {::}
         ;
-
-		
+*/		
