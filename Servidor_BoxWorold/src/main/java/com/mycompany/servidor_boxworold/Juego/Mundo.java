@@ -28,12 +28,21 @@ public class Mundo {
     private ArrayList<Casillas> casillas = new ArrayList<>();
     private ArrayList<Errores> errores = new ArrayList<>();
     private String xml;
+    private boolean bandera;
 
     public Mundo() {
     }
 
     public void agregaDes(String tipo, String Des) {
         errores.add(new Errores(tipo, Des));
+    }
+
+    public boolean isBandera() {
+        return bandera;
+    }
+
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
     }
 
     public boolean validacion() {
@@ -112,8 +121,10 @@ public class Mundo {
         if(validacion()){
             xml = xml(jugador1.get(0));
             imprimir();
+            bandera = true;
         }
         else{
+            bandera = false;
             System.err.println("Algo salio mal ");
         }
     }

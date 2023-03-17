@@ -10,17 +10,17 @@ import java.io.Serializable;
  *
  * @author jose
  */
-public class archivoEntrada implements Serializable {
+public class SimpleMessage implements Serializable {
     
     private String entrada;
     
     private static final long serialVersionUID = 6529685098267757690L;
 
-    public archivoEntrada(String entrada) {
+    public SimpleMessage(String entrada) {
         this.entrada = entrada;
     }
 
-    public archivoEntrada() {
+    public SimpleMessage() {
     }
 
     public String getEntrada() {
@@ -29,6 +29,11 @@ public class archivoEntrada implements Serializable {
 
     public void setEntrada(String entrada) {
         this.entrada = entrada;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleMessage{" + "entrada=" + entrada + '}';
     }
     
     

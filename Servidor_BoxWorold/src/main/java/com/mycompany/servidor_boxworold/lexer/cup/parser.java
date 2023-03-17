@@ -358,7 +358,16 @@ public class parser extends java_cup.runtime.lr_parser {
 	public ArrayList<Caja> cajas = new ArrayList<>();
 	public ArrayList<Almacen> almacen = new ArrayList<>();
 	public ArrayList<Casillas> casillas = new ArrayList<>();
-        public Mundo mundoTemp = new Mundo();
+        
+        private Mundo mundoTemp = new Mundo();
+
+    public Mundo getMundoTemp() {
+        return mundoTemp;
+    }
+
+    public void setMundoTemp(Mundo mundoTemp) {
+        this.mundoTemp = mundoTemp;
+    }
 
         Casillas casillaTemp = new Casillas();
         Caja cajaTemp = new Caja();

@@ -4,12 +4,14 @@
  */
 package com.mycompany.servidor_boxworold.sockets;
 
+import com.mycompany.servidor_boxworold.lexer.cup.parser;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,36 +22,44 @@ import java.util.logging.Logger;
 public class entrada extends Thread{
     
     private int puerto;
+    private ArrayList<parser> mundos = new ArrayList<>();
 
     public entrada(int ip) {
         this.puerto = ip;
     }
     @Override
     public void run(){
-        while(true){
         try(ServerSocket servidor = new ServerSocket(this.puerto)){
+            while(true){
             System.out.println("escuchando 0");
-            String direccionHost = InetAddress.getLocalHost().getHostAddress();
             Socket socket = servidor.accept();
             System.out.println("escuchando");
-            ObjectOutputStream salida = new ObjectOutputStream(socket.getOutputStream());
+            
+            //ObjectOutputStream salida = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream entrada = new ObjectInputStream(socket.getInputStream());
-            archivoEntrada nuevo = (archivoEntrada) entrada.readObject();
-            System.err.println("entrad de archivo");
-            System.err.println(nuevo.getEntrada());
+            System.out.println("Mensaje por recibir");
+            //SimpleMessage nuevo = (SimpleMessage) entrada.readObject();
+            String nuevos  = entrada.readUTF();
+            
+            System.out.println("Mensaje Recibido ");
+            System.out.println(nuevos);
+            //System.out.println("entrad de archivo"+nuevo.getEntrada());
+            
+            socket.close();
+            }
+
+            //System.err.println(nuevo.getEntrada());
             // Lo que entra leido con entrada 
             
             
             //lo que sale enviado con salida 
             
-        }
-        catch(IOException e){
+        }catch(IOException e){
             System.out.println("error");
-        }   catch (ClassNotFoundException ex) {
-                Logger.getLogger(entrada.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("error");
-            }
         }
+        //Logger.getLogger(entrada.class.getName()).log(Level.SEVERE, null, ex);
+
+        
         
     }
     

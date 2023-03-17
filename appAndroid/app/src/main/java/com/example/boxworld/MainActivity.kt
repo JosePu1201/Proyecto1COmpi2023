@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.example.boxworld.sockets.SimpleMessage
 import com.example.boxworld.sockets.Tarea
-import com.example.boxworld.sockets.archivoEntrada
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
+import java.net.Socket
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
     val ip: String = "192.168.0.101"
-    val puerto: Int = 9090
+    val puerto: Int = 5000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,19 +25,24 @@ class MainActivity : AppCompatActivity() {
 
         boton.setOnClickListener(View.OnClickListener {
             println("click")
-            val text = editor.text.toString()
-            this.enviar(text)
+
+            Executors.newSingleThreadExecutor().execute{
+                val mensaje: SimpleMessage = SimpleMessage("hola mundo del servidor")
+                val socket = Socket(ip,puerto)
+                val outputStream = ObjectOutputStream(socket.getOutputStream())
+                //val inputStream = ObjectInputStream(socket.getInputStream())
+                outputStream.writeUTF("esto es una prueba desde el cliente")
+                socket.close()
+            }
         })
 
     }
 
 
-    private fun enviar(entrad: String){
-
+    /*private fun enviar(entrad: String){
         val archivoEntrada = archivoEntrada(entrad)
-
-        val tarea = Tarea(ip,puerto,archivoEntrada);
+        val tarea = Tarea(ip,puerto,entrad)
         //tarea.delegate = this
         tarea.execute()
-    }
+    }*/
 }

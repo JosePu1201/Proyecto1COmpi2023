@@ -18,7 +18,8 @@ parser code {:
 	public ArrayList<Caja> cajas = new ArrayList<>();
 	public ArrayList<Almacen> almacen = new ArrayList<>();
 	public ArrayList<Casillas> casillas = new ArrayList<>();
-        public Mundo mundoTemp = new Mundo();
+
+        private Mundo mundoTemp = new Mundo();
 
         Casillas casillaTemp = new Casillas();
         Caja cajaTemp = new Caja();
@@ -126,6 +127,13 @@ parser code {:
                 }
 
                 return numero;
+        }
+        public Mundo getMundoTemp() {
+        return mundoTemp;
+        }
+
+        public void setMundoTemp(Mundo mundoTemp) {
+        this.mundoTemp = mundoTemp;
         }
 
 :};
