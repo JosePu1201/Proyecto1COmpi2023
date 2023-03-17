@@ -81,6 +81,7 @@ public class MuestraPeticiones extends javax.swing.JPanel {
     public void ejecucion(){
         System.err.println("entra a ejecucion");
         entrada nuevo = new entrada(5000);
+        nuevo.setPanel(this);
         nuevo.start();        
         
     }

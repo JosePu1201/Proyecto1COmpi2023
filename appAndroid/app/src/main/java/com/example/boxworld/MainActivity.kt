@@ -6,9 +6,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.example.boxworld.sockets.SimpleMessage
-import com.example.boxworld.sockets.Tarea
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
+import java.io.DataInputStream
+import java.io.DataOutputStream
 import java.net.Socket
 import java.util.concurrent.Executors
 
@@ -25,13 +24,14 @@ class MainActivity : AppCompatActivity() {
 
         boton.setOnClickListener(View.OnClickListener {
             println("click")
-
+            //enviar("hola mundo")
             Executors.newSingleThreadExecutor().execute{
+                val txt = editor.text.toString()
                 val mensaje: SimpleMessage = SimpleMessage("hola mundo del servidor")
                 val socket = Socket(ip,puerto)
-                val outputStream = ObjectOutputStream(socket.getOutputStream())
-                //val inputStream = ObjectInputStream(socket.getInputStream())
-                outputStream.writeUTF("esto es una prueba desde el cliente")
+                val DataOutputStream = DataOutputStream(socket.getOutputStream())
+                val DataInputStream = DataInputStream(socket.getInputStream())
+                DataOutputStream.writeUTF(txt)
                 socket.close()
             }
         })
@@ -39,10 +39,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    /*private fun enviar(entrad: String){
-        val archivoEntrada = archivoEntrada(entrad)
-        val tarea = Tarea(ip,puerto,entrad)
+    private fun enviar(entrad: String){
+      /*  val archivoEntrada = SimpleMessage(entrad)
+        val tarea = MyTask(ip,puerto,archivoEntrada)
         //tarea.delegate = this
-        tarea.execute()
-    }*/
+        tarea.execute()*/
+    }
 }

@@ -47,7 +47,7 @@ public class Mundo {
 
     public boolean validacion() {
         boolean val = true;
-        System.err.println("Entra a validar");
+        System.out.println("Entra a validar");
         System.out.println("la validacion de esto es: "+jugador1.size());
         if (jugador1.size() > 2) {
             agregaDes("Semantigo", "Solo se puede definir la posicion del jugador una vez");
@@ -120,7 +120,7 @@ public class Mundo {
     public void returnWorold(){
         if(validacion()){
             xml = xml(jugador1.get(0));
-            imprimir();
+            System.out.println(xml);
             bandera = true;
         }
         else{
@@ -137,7 +137,7 @@ public class Mundo {
     }
 
     public void imprimir() {
-        System.err.println(xml(jugador1.get(0)));
+        System.out.println(xml(jugador1.get(0)));
     }
 
     public ArrayList<Jugador> getJugador1() {
