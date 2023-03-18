@@ -14,7 +14,7 @@
         android:layout_marginTop="68dp"
         android:text="Agregar Mundo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintTop_toBottomOf="@+id/entradaTexto" />
 
     <Button
         android:id="@+id/pedir"
@@ -24,7 +24,7 @@
         android:layout_marginEnd="8dp"
         android:text="Pedir"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintTop_toBottomOf="@+id/entradaTexto" />
 
     <Button
         android:id="@+id/mover"
@@ -35,10 +35,10 @@
         app:layout_constraintEnd_toStartOf="@+id/pedir"
         app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toEndOf="@+id/regresar"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintTop_toBottomOf="@+id/entradaTexto" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
+        android:id="@+id/entradaTexto"
         android:layout_width="341dp"
         android:layout_height="147dp"
         android:layout_marginTop="32dp"
