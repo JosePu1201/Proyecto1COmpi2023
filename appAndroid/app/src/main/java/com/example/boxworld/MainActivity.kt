@@ -1,5 +1,6 @@
 package com.example.boxworld
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val editor: EditText = findViewById(R.id.editTextTextMultiLine)
 
         val boton: Button = findViewById(R.id.compilar)
+        val siguiente: Button = findViewById(R.id.siguiente)
 
         boton.setOnClickListener(View.OnClickListener {
             println("click")
@@ -35,14 +37,19 @@ class MainActivity : AppCompatActivity() {
                 socket.close()
             }
         })
+        siguiente.setOnClickListener(View.OnClickListener {
+            goToDrawActivity("hola mundo")
+        })
+
+
+
 
     }
-
-
-    private fun enviar(entrad: String){
-      /*  val archivoEntrada = SimpleMessage(entrad)
-        val tarea = MyTask(ip,puerto,archivoEntrada)
-        //tarea.delegate = this
-        tarea.execute()*/
+    private fun goToDrawActivity(input: String) {
+        val intent = Intent(this, GraficaActivity::class.java)
+        val bundle = Bundle()
+        bundle.putSerializable("input", input)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 }
