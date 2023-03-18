@@ -35,20 +35,28 @@ class GraficaActivity : AppCompatActivity() {
         })
 
         graf.setOnClickListener(View.OnClickListener {
+                val texto = entradaTexto.text.toString()
+                val analisis = Analisis(texto)
+                analisis.run()
+
+            if(analisis.parser.name != null){
+                println(analisis.parser.name)
                 Executors.newSingleThreadExecutor().execute{
-                val txt = entradaTexto.text.toString()
-                val socket = Socket(ip,puerto)
-                val DataOutputStream = DataOutputStream(socket.getOutputStream())
-                val DataInputStream = DataInputStream(socket.getInputStream())
-                DataOutputStream.writeUTF(txt)
-                socket.close()
+                    val txt = analisis.parser.name
+                    val socket = Socket(ip,puerto)
+                    val DataOutputStream = DataOutputStream(socket.getOutputStream())
+                    val DataInputStream = DataInputStream(socket.getInputStream())
+                    DataOutputStream.writeUTF(txt)
+                    socket.close()
+                }
+
             }
         })
 
         mover.setOnClickListener(View.OnClickListener {
             val texto = entradaTexto.text.toString()
             val analisis = Analisis(texto)
-            analisis.generarTodo()
+            analisis.run()
         })
     }
 

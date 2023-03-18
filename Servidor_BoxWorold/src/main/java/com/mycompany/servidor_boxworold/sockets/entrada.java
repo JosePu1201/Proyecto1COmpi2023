@@ -71,7 +71,7 @@ public class entrada extends Thread {
             }
 
         } catch (Exception e) {
-            System.out.println("no sale xD");
+            System.out.println("hay errores");
         }
 
     }

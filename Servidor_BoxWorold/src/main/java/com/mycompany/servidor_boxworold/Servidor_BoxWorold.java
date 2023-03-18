@@ -25,6 +25,7 @@ import javax.swing.JFrame;
 public class Servidor_BoxWorold {
 
     public static void main(String[] args) {
+
         Toolkit pantalla = Toolkit.getDefaultToolkit();
         Dimension tPantalla = pantalla.getScreenSize(); // guarda el tamaño de la pantalla
         int altura = tPantalla.height;

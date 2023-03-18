@@ -4,6 +4,23 @@ import java.util.*;
 import com.example.boxworld.Mov.*;
 
 parser code {:
+        private String all;
+        private String name;
+        public String getAll() {
+                return all;
+        }
+
+        public void setAll(String all) {
+                this.all = all;
+        }
+
+        public String getName() {
+                return name;
+        }
+
+        public void setName(String name) {
+                this.name = name;
+        }
 	public String texto(Object o){
 		String salida = "";
 			try{
@@ -28,11 +45,12 @@ parser code {:
         }
 
 :};
-terminal UP,PARENTESISABIERTO,PARENTESISCERRADO,NUMERO,RIGHT,PUSH,CEIL,FLOOR,PUNTOYCOMA,DOWN,SUMA,RESTA,MULTI,DIV,POTENCIA,RAIZ,LEFT,DECIMAL;
+terminal UP,PARENTESISABIERTO,PARENTESISCERRADO,NUMERO,RIGHT,PUSH,CEIL,FLOOR,PUNTOYCOMA,DOWN,SUMA,RESTA,MULTI,DIV,POTENCIA,RAIZ,LEFT,DECIMAL,DOSPUNTOS,LLAVEABIERTA,LLAVECERRADA,COMILLAS,WOROLD,ID,ALL,WOROLDS;
 
-non terminal inicio,inicio1,up,down,left1,right1,push,opNumero,opDireccion,entrada,opciones,a,b,c,d,inicioAprox,direccion,mov;/**/
+non terminal inicio,inicio1,up,down,left1,right1,push,opNumero,opDireccion,entrada,opciones,a,b,c,d,inicioAprox,direccion,mov,aprox,pet,tipo;/**/
 
 inicio	::=	inicioAprox{:System.out.println("termina mas de uno xD");:}
+        |       pet
 		;
 inicioAprox	::=	inicioAprox inicio1 
 		|	inicio1
@@ -43,22 +61,62 @@ inicio1	::=	mov {::}
 	;
 
 direccion	::=	UP:sal {:RESULT = sal;:}
-			|	DOWN:sal {:RESULT = sal;:}
-			|	LEFT:sal {:RESULT = sal;:}
-			|	RIGHT:sal {:RESULT = sal;:}
-			;
+		|	DOWN:sal {:RESULT = sal;:}
+		|	LEFT:sal {:RESULT = sal;:}
+		|	RIGHT:sal {:RESULT = sal;:}
+		;
 	
 mov	  	::= direccion:dir entrada:num {:
                 if(texto(dir).equals("up")){
-                        System.out.println("up");}
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Movimiento mov = new Movimiento(Direccion.ARRIBA,casteoNumero(num));
+                                System.out.println(mov.toString());
+                        }
+                        else{   
+                                System.out.println("menor que 0");
+                                Movimiento mov = new Movimiento(Direccion.ABAJO,(casteoNumero(num)*-1));
+                                System.out.println(mov.toString());
+                        }
+                        }
                 else if(texto(dir).equals("down")){
-                        System.out.println("down");        
-                }
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Movimiento mov = new Movimiento(Direccion.ABAJO,casteoNumero(num));
+                                System.out.println(mov.toString());
+                        }
+                        else{   
+                                System.out.println("menor que 0");
+                                Movimiento mov = new Movimiento(Direccion.ARRIBA,(casteoNumero(num)*-1));
+                                System.out.println(mov.toString());
+                        }
+                        }                       
                 else if(texto(dir).equals("left")){
-                        System.out.println("left");
+
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Movimiento mov = new Movimiento(Direccion.IZQUIERDA,casteoNumero(num));
+                                System.out.println(mov.toString());
+                        }
+                        else{   
+                                System.out.println("menor que 0");
+                                Movimiento mov = new Movimiento(Direccion.DERECHA,(casteoNumero(num)*-1));
+                                System.out.println(mov.toString());
+                        }
+                                                
                 }
                 else if(texto(dir).equals("right")){
-                        System.out.println("right");
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Movimiento mov = new Movimiento(Direccion.DERECHA,casteoNumero(num));
+                                System.out.println(mov.toString());
+                        }
+                        else{   
+                                System.out.println("menor que 0");
+                                Movimiento mov = new Movimiento(Direccion.IZQUIERDA,(casteoNumero(num)*-1));
+                                System.out.println(mov.toString());
+                        }
+                        
                 }:}
     	;
 
@@ -66,12 +124,64 @@ entrada ::=	PARENTESISABIERTO opNumero:num PARENTESISCERRADO PUNTOYCOMA {:RESULT
 		;
 	
 
-push	::= PUSH direccion:dir entrada:num {:Push push = new Pus(texto(dir),casteoNumero(num));:}
-		;
+push	::= PUSH direccion:dir entrada:num {:
+                if(texto(dir).equals("up")){
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Push push = new Push(Direccion.ARRIBA,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                        else{   
+                                System.out.println("menor que 0");
+                                Push push = new Push(Direccion.ABAJO,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                        }
+                else if(texto(dir).equals("down")){
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Push push = new Push(Direccion.ABAJO,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                        else{   
+                                Push push = new Push(Direccion.ARRIBA,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                        }                       
+                else if(texto(dir).equals("left")){
 
-opNumero	::= FLOOR PARENTESISABIERTO a:num PARENTESISCERRADO {:RESULT = (double)num;:}
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Push push = new Push(Direccion.IZQUIERDA,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                        else{   
+                                System.out.println("menor que 0");
+                                Push push = new Push(Direccion.DERECHA,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                                                
+                }
+                else if(texto(dir).equals("right")){
+                        if(0<casteoNumero(num)){
+                                System.out.println("mayor que 0");
+                                Push push = new Push(Direccion.DERECHA,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                        else{   
+                                System.out.println("menor que 0");
+                                Push push = new Push(Direccion.IZQUIERDA,casteoNumero(num));
+                                System.out.println(push.toString());
+                        }
+                        
+                }
+                :}
+		;
+aprox   ::=             FLOOR PARENTESISABIERTO a:num PARENTESISCERRADO {:RESULT = (double)num;:}
 			|	CEIL PARENTESISABIERTO a:num PARENTESISCERRADO {:RESULT = (double)num;:}
-			|	a:num {:RESULT = (double)num;:} 
+
+        ;
+opNumero	::=  a:num {:RESULT = (double)num;:} 
         	;
 
 a ::=   a:n1 SUMA b:n2 {:RESULT = (double)n1 +(double) n2;  :}
@@ -92,9 +202,16 @@ c ::=   d:n1 POTENCIA c:n2 {: :}
         ;
 
 d ::=   NUMERO:n1 {: RESULT = Double.valueOf(n1.toString());:}
-        | DECIMAL:n1 {:RESULT = Double.valueOf(n1.toString());:}       
+        | DECIMAL:n1 {:RESULT = Double.valueOf(n1.toString());:}
+        | aprox:n1 {:RESULT = Double.valueOf(n1.toString());:}       
         | PARENTESISABIERTO a:n1 PARENTESISCERRADO {: RESULT = (double)n1; :}
         ;
+
+pet ::= LLAVEABIERTA tipo LLAVECERRADA{::}
+        ;
+tipo    ::=     COMILLAS WOROLDS COMILLAS DOSPUNTOS COMILLAS ALL COMILLAS {:name = "all";:}
+        |       COMILLAS WOROLD COMILLAS DOSPUNTOS COMILLAS ID:h COMILLAS   {:name = texto(h);:}
+        ;        
 
 /* 
 a ::=   a SUMA b {::}

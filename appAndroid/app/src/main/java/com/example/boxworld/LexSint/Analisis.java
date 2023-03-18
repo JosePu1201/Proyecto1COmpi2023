@@ -1,6 +1,8 @@
 package com.example.boxworld.LexSint;
+import java.io.Reader;
+import java.io.StringReader;
 
-public class Analisis {
+public class Analisis extends Thread{
     private String entrada;
     private LexerCliente lexico;
     private parser parser;
@@ -8,12 +10,17 @@ public class Analisis {
         this.entrada = entrada;
     }
 
-    public void generarTodo(){
+    @Override
+    public void run(){
+        System.out.println("entra a clase o no xD ");
+
         Reader adentro = new StringReader(entrada);
         lexico = new LexerCliente(adentro);
         parser = new parser(lexico);
         try{
+            System.out.println("inicia parser");
             parser.parse();
+            System.out.println("Termina parser");
         }
         catch(Exception e){
 
