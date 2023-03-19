@@ -5,9 +5,11 @@
 package com.mycompany.servidor_boxworold.sockets;
 
 import com.mycompany.servidor_boxworold.Grafico.MuestraPeticiones;
+import com.mycompany.servidor_boxworold.Juego.Errores;
 import com.mycompany.servidor_boxworold.Juego.Mundo;
 import com.mycompany.servidor_boxworold.lexer.Lexer;
 import com.mycompany.servidor_boxworold.lexer.cup.parser;
+import com.mycompany.servidor_boxworold.xml;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -44,22 +46,19 @@ public class entrada extends Thread {
                 DataOutputStream salida = new DataOutputStream(socket.getOutputStream());
                 DataInputStream entrada = new DataInputStream(socket.getInputStream());
                 String nuevos = entrada.readUTF();
-
-                System.out.println("Mensaje Recibido ");
-                System.out.println(nuevos);
                 panel.getEntrada().setText(nuevos);
-                parser(nuevos);
+                parser(nuevos,salida);
                 socket.close();
             }
 
         } catch (IOException e) {
-            System.out.println("error");
+            
         }
         //Logger.getLogger(entrada.class.getName()).log(Level.SEVERE, null, ex);
 
     }
 
-    public void parser(String archivo) {
+    public void parser(String archivo,DataOutputStream salida) {
         Reader adentro = new StringReader(archivo);
         Lexer nuevo = new Lexer(adentro);
         parser nuevo1 = new parser(nuevo);
@@ -67,11 +66,21 @@ public class entrada extends Thread {
             nuevo1.parse();
             if(nuevo1.getMundoTemp().isBandera()){
                 mundos.add(nuevo1.getMundoTemp());
-                System.out.println("se agrego un mundo al hilo xD");
+                salida.writeUTF("Mundo correcto"); 
+                panel.getSalida().setText("Mundo Correcto");
+            }else{
+                String s="";
+                for (Errores mundo :nuevo1.getMundoTemp().getErrores()) {
+                      mundo.xml();
+                      s = s + mundo.getSalXml();
+                }
+                xml n = new xml();
+                salida.writeUTF(n.error(s));  
+                panel.getSalida().setText(n.error(s));
             }
 
         } catch (Exception e) {
-            System.out.println("hay errores");
+            
         }
 
     }

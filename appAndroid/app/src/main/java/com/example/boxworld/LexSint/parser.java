@@ -390,52 +390,36 @@ class CUP$parser$actions {
 		
                 if(texto(dir).equals("up")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ARRIBA,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ABAJO,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                         }
                 else if(texto(dir).equals("down")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ABAJO,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ARRIBA,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                         }                       
                 else if(texto(dir).equals("left")){
 
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.IZQUIERDA,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.DERECHA,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                                                 
                 }
                 else if(texto(dir).equals("right")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.DERECHA,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.IZQUIERDA,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                         
                 }
@@ -468,51 +452,36 @@ class CUP$parser$actions {
 		
                 if(texto(dir).equals("up")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.ARRIBA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Push push = new Push(Direccion.ABAJO,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         }
                 else if(texto(dir).equals("down")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.ABAJO,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
                                 Push push = new Push(Direccion.ARRIBA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         }                       
                 else if(texto(dir).equals("left")){
 
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.IZQUIERDA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Push push = new Push(Direccion.DERECHA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                                                 
                 }
                 else if(texto(dir).equals("right")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.DERECHA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Push push = new Push(Direccion.IZQUIERDA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         
                 }
@@ -768,7 +737,7 @@ class CUP$parser$actions {
           case 33: // tipo ::= COMILLAS WOROLDS COMILLAS DOSPUNTOS COMILLAS ALL COMILLAS 
             {
               Object RESULT =null;
-		all = "all";
+		name = "all";
               CUP$parser$result = parser.getSymbolFactory().newSymbol("tipo",20, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

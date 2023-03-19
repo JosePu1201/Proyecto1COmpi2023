@@ -31,6 +31,13 @@ public class Mundo {
     private boolean bandera;
 
     public Mundo() {
+        colorCajaFuera.add("#ffff00");
+        colorCajasEnAlmacen.add("#fe0002");
+        colorAlmace.add("#d6fe0a");
+        colorPared.add("#bdbebf");
+        colorCamino.add( "#0001ff");
+        colorLugarNoDefinido.add("#303030");
+        colorJugador.add("#ff00f7");              
     }
 
     public void agregaDes(String tipo, String Des) {
@@ -47,10 +54,8 @@ public class Mundo {
 
     public boolean validacion() {
         boolean val = true;
-        System.out.println("Entra a validar");
-        System.out.println("la validacion de esto es: "+jugador1.size());
         if (jugador1.size() > 2) {
-            agregaDes("Semantigo", "Solo se puede definir la posicion del jugador una vez");
+            agregaDes("Semantico", "Solo se puede definir la posicion del jugador una vez");
         }
         if (nombre.size() > 2) {
             agregaDes("Semantico", "Solo se puede definir el nombre una vez");
@@ -61,11 +66,11 @@ public class Mundo {
             val = false;
         }
         if (columnas.size() > 2) {
-            agregaDes("Semantico", "Solo de puede definir la columna una vez");
+            agregaDes("Semantico", "Solo se puede definir la columna una vez");
             val = false;
         }
         if (colorCajaFuera.size() > 3) {
-            agregaDes("Semantico", "Solo de puede definir el color una vez");
+            agregaDes("Semantico", "Solo se puede definir el color una vez");
             val = false;
 
         } else if (colorCajaFuera.size() == 2) {
@@ -73,48 +78,50 @@ public class Mundo {
         }
 
         if (colorCajasEnAlmacen.size() > 3) {
-            agregaDes("Semantico", "Solo de puede definir el color una vez");
+            agregaDes("Semantico", "Solo se puede definir el color una vez");
             val = false;
 
         } else if (colorCajasEnAlmacen.size() == 2) {
             colorCajasEnAlmacen.add(0, colorCajasEnAlmacen.get(0));
         }
         if (colorAlmace.size() > 3) {
-            agregaDes("Semantico", "Solo de puede definir el color una vez");
+            agregaDes("Semantico", "Solo se puede definir el color una vez");
             val = false;
 
         } else if (colorAlmace.size() == 2) {
             colorAlmace.add(0, colorAlmace.get(0));
         }
         if (colorPared.size() > 3) {
-            agregaDes("Semantico", "Solo de puede definir el color una vez");
+            agregaDes("Semantico", "Solo se puede definir el color una vez");
             val = false;
 
         } else if (colorPared.size() == 2) {
             colorPared.add(0, colorPared.get(0));
         }
         if (colorCamino.size() > 3) {
-            agregaDes("Semantico", "Solo de puede definir el color una vez");
+            agregaDes("Semantico", "Solo se puede definir el color una vez");
             val = false;
 
         } else if (colorCamino.size() == 2) {
             colorCamino.add(0, colorCamino.get(0));
         }
         if (colorLugarNoDefinido.size() > 3) {
-            agregaDes("Semantico", "Solo de puede definir el color una vez");
+            agregaDes("Semantico", "Solo se puede definir el color una vez");
             val = false;
 
         } else if (colorLugarNoDefinido.size() == 2) {
             colorLugarNoDefinido.add(0, colorLugarNoDefinido.get(0));
         }
         if (colorJugador.size() > 3) {
-            agregaDes("Semantico", "Solo de puede definir el color una vez");
+            agregaDes("Semantico", "Solo se puede definir el color una vez");
             val = false;
 
         } else if (colorJugador.size() == 2) {
             colorJugador.add(0, colorJugador.get(0));
         }
-
+        if(errores.size()!=0){
+            val = false;
+        }
         return val;
     }
     public void returnWorold(){
@@ -125,7 +132,7 @@ public class Mundo {
         }
         else{
             bandera = false;
-            System.err.println("Algo salio mal ");
+            
         }
     }
     public String getXml() {

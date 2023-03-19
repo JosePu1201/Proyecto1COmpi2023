@@ -9,12 +9,38 @@ package com.mycompany.servidor_boxworold.Juego;
  * @author jose
  */
 public class Errores {
-    String tipo;
-    String Descripcion;
-    int fila;
-    int columna;
+    private String token;
+    private String tipo;
+    private String Descripcion;
+    private int fila;
+    private int columna;
+    private String salXml;
 
     public Errores() {
+    }
+
+    public Errores(String token, String tipo, String Descripcion, int fila, int columna) {
+        this.token = token;
+        this.tipo = tipo;
+        this.Descripcion = Descripcion;
+        this.fila = fila;
+        this.columna = columna;
+    }
+
+    public String getSalXml() {
+        return salXml;
+    }
+
+    public void setSalXml(String salXml) {
+        this.salXml = salXml;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Errores(String tipo, String Descripcion) {
@@ -52,6 +78,15 @@ public class Errores {
 
     public void setColumna(int columna) {
         this.columna = columna;
+    }
+    public void xml(){
+        salXml = "<error>\n"
+                + "\t<lexema>"+token+"</lexema>\n"
+                + "\t<line>"+fila+"</line>\n"
+                + "\t<column>"+columna+"</column>\n"
+                + "\t<type>"+tipo+"</type>\n"
+                + "\t<description>"+Descripcion+"</description>\n"
+                + "</error>\n";
     }
     
             

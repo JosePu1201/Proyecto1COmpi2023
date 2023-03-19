@@ -17,6 +17,7 @@ public class sym {
   public static final int TARGETS = 27;
   public static final int BOX_COLOR = 17;
   public static final int TARGET_COLOR = 19;
+  public static final int FLOOR = 42;
   public static final int COLOR_JUGADOR = 12;
   public static final int LLAVECERRADA = 13;
   public static final int CONFIG = 26;
@@ -45,6 +46,7 @@ public class sym {
   public static final int BOXES = 40;
   public static final int FILA = 6;
   public static final int HEXADECIMAL = 10;
+  public static final int CEIL = 41;
   public static final int UNDEFINED_COLOR = 16;
   public static final int CORCHETEABIERTO = 21;
   public static final int COLUMNA = 7;
@@ -90,7 +92,9 @@ public class sym {
   "RAIZ",
   "HALL",
   "BRICK",
-  "BOXES"
+  "BOXES",
+  "CEIL",
+  "FLOOR"
   };
 }
 

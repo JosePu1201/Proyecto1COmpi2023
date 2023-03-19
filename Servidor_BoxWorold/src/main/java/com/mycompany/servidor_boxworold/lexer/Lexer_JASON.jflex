@@ -55,6 +55,8 @@ TARGETS = "targets"
 PLAYER = "player"
 HALL = "HALL" 
 BRICK = "BRICK" 
+ceil = "CEIL"
+floor = "FLOOR"
 LLAVEABIERTA = "{"
 LLAVECERRADA = "}"
 CORCHETEABIERTO  = "\["
@@ -99,6 +101,8 @@ hexa = [#][a-fA-F0-9]+
 {BRICK}                 {/*System.out.println(yytext());*/return new Symbol(sym.BRICK,yyline+1,yycolumn+1,yytext());}
 {BOARD}                 {/*System.out.println(yytext());*/return new Symbol(sym.BOARD,yyline+1,yycolumn+1,yytext());}
 {BOXES}                 {/*System.out.println(yytext());*/return new Symbol(sym.BOXES,yyline+1,yycolumn+1,yytext());}
+{ceil}                  {return new Symbol(sym.CEIL,yyline+1,yycolumn+1,yytext());}
+{floor}                 {return new Symbol(sym.FLOOR,yyline+1,yycolumn+1,yytext());}
 
 
 //agrupacion 

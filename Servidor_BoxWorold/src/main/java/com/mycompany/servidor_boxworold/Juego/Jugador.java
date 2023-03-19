@@ -10,7 +10,7 @@ package com.mycompany.servidor_boxworold.Juego;
  */
 public class Jugador extends Casillas {
         
-	private String nombre = "Jugador";  
+    private String nombre = "Jugador";  
 
     public Jugador() {
     }

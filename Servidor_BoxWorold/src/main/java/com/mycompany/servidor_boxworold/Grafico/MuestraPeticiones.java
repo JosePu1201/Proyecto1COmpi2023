@@ -80,7 +80,6 @@ public class MuestraPeticiones extends javax.swing.JPanel {
     private javax.swing.JTextArea salida;
     // End of variables declaration//GEN-END:variables
     public void ejecucion(){
-        System.out.println("entra a ejecucion");
         entrada nuevo = new entrada(5000);
         nuevo.setPanel(this);
         nuevo.start();

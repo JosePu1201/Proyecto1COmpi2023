@@ -12,15 +12,11 @@ public class Analisis extends Thread{
 
     @Override
     public void run(){
-        System.out.println("entra a clase o no xD ");
-
         Reader adentro = new StringReader(entrada);
         lexico = new LexerCliente(adentro);
         parser = new parser(lexico);
         try{
-            System.out.println("inicia parser");
             parser.parse();
-            System.out.println("Termina parser");
         }
         catch(Exception e){
 

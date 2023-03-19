@@ -4,9 +4,9 @@ import java_cup.runtime.*;
 import java.util.*;
 parser code {:
 
-        public ArrayList<String> nombre  = new ArrayList<>(); ;
+        public ArrayList<String> nombre  = new ArrayList<>(); 
 	public ArrayList<Integer> filas = new ArrayList<>();;
-	public ArrayList<Integer> columnas = new ArrayList<>();;
+	public ArrayList<Integer> columnas = new ArrayList<>();
 	public ArrayList<String> colorCajaFuera  = new ArrayList<>();// "#ffff00";
 	public ArrayList<String> colorCajasEnAlmacen  = new ArrayList<>();// "#fe0002";
 	public ArrayList<String> colorAlmace  = new ArrayList<>();// "#d6fe0a";
@@ -26,22 +26,7 @@ parser code {:
         Almacen almacenTemo = new Almacen();
         Jugador jugadorTemp = new Jugador();
         public void set(){
-            mundoTemp.setAlmacen(almacen);
-            mundoTemp.setCajas(cajas);
-            mundoTemp.setColorAlmace(colorAlmace);
-            mundoTemp.setColorCajaFuera(colorCajaFuera);
-            mundoTemp.setColorCajasEnAlmacen(colorCajasEnAlmacen);
-            mundoTemp.setColorCamino(colorCamino);
-            mundoTemp.setColorJugador(colorJugador);
-            mundoTemp.setColorLugarNoDefinido(colorLugarNoDefinido);
-            mundoTemp.setColorPared(colorPared);
-            mundoTemp.setColumnas(columnas);
-            mundoTemp.setFilas(filas);
-            mundoTemp.setJugador(jugador1);
-            mundoTemp.setNombre(nombre);
-            mundoTemp.setCasillas(casillas);
-            imprimir();
-            mundoTemp.imprimir();
+                mundoTemp.returnWorold();
         }
         public int castEntero(Object a){
                 int num = -1;
@@ -139,20 +124,30 @@ parser code {:
 :};
 //   
  terminal COMILLAS, DOSPUNTOS, COMA, NOMBRE, FILA, COLUMNA, ID,  NUMERO, HEXADECIMAL, LLAVEABIERTA, COLOR_JUGADOR, LLAVECERRADA, BRICK_COLOR, HALL_COLOR, UNDEFINED_COLOR, BOX_COLOR, BOX_ONT_TAGET_COLOR, TARGET_COLOR, 
-BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, CONFIG,TARGETS,PLAYER,DECIMAL, MAS, MENOS, DIAGONAL,MULTIPLICAR,POTENCIA,PARENTESISCERRADO,PARENTESISABIERTO,RAIZ,HALL,BRICK,BOXES;
+BOARD, CORCHETEABIERTO, CORCHETECERRADO, POSX, POSY,TYPE, CONFIG,TARGETS,PLAYER,DECIMAL, MAS, MENOS, DIAGONAL,MULTIPLICAR,POTENCIA,PARENTESISCERRADO,PARENTESISABIERTO,RAIZ,HALL,BRICK,BOXES,CEIL,FLOOR;
 
  non terminal inicio, desicion, nombre1 , col , filas, confi, nose, colorCajaFuera, colorCajaAlmacen, colorAlamacen, colorPared, colorCamino, noDefinido, colorJugador, colore, algo, otraCosa,tipo, opNum,
  info , board,targets, algomas,infoTarjeta, infoExactaTarjeta, posTarjeta, posJugador,ePosJ, posXJ,posYJ,player,a, b, c, d, decisiones,eHex,l,pos,posEjes;
-non terminal tipo1,boxes,box,caja,posCaja,estruct1,posEjes1;
+non terminal tipo1,boxes,box,caja,posCaja,estruct1,posEjes1,tipoCeil;
 //INICIO
  inicio ::= LLAVEABIERTA decisiones LLAVECERRADA{:/*imprimir();*/set();:}
             ;
 //arreglar el tema de los numeros 
-nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID:id COMILLAS  {:nombre.add(casteo(id));:}
+nombre1  ::=    COMILLAS NOMBRE COMILLAS DOSPUNTOS COMILLAS ID:id COMILLAS  {:mundoTemp.getNombre().add(casteo(id));:}
             ;
-filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS COMILLAS opNum:numero COMILLAS  {:filas.add(castEntero(numero));:}
+filas   ::=    COMILLAS FILA COMILLAS DOSPUNTOS  opNum:numero   {:mundoTemp.getFilas().add(castEntero(numero));
+                if(0>castEntero(numero)){
+                        Errores e = new Errores(numero.toString(), "Semantico", "Numero negativo", numeroleft, numeroright);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
             ;
-col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS COMILLAS opNum:numero COMILLAS  {:columnas.add(castEntero(numero));:}
+col     ::=     COMILLAS COLUMNA COMILLAS DOSPUNTOS  opNum:numero   {:mundoTemp.getColumnas().add(castEntero(numero));
+                if(0>castEntero(numero)){
+                        Errores e = new Errores(numero.toString(), "Semantico", "Numero negativo", numeroleft, numeroright);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
             ;
 
 decisiones      ::=     decisiones COMA desicion {::}
@@ -187,25 +182,25 @@ colore  ::=     colorCajaFuera {::}
         ;
 
 
-colorCajaFuera      ::=  COMILLAS BOX_COLOR COMILLAS  eHex:hexa {:colorCajaFuera.add(casteo(hexa));:}
+colorCajaFuera      ::=  COMILLAS BOX_COLOR COMILLAS  eHex:hexa {:mundoTemp.getColorCajaFuera().add(casteo(hexa));:}
                     ;
 
-colorCajaAlmacen    ::= COMILLAS BOX_ONT_TAGET_COLOR COMILLAS  eHex:hexa {:colorCajasEnAlmacen.add(casteo(hexa));:}
+colorCajaAlmacen    ::= COMILLAS BOX_ONT_TAGET_COLOR COMILLAS  eHex:hexa {:mundoTemp.getColorCajasEnAlmacen().add(casteo(hexa));:}
                     ;
 
-colorAlamacen       ::= COMILLAS TARGET_COLOR COMILLAS  eHex:hexa {:colorAlmace.add(casteo(hexa));:}
+colorAlamacen       ::= COMILLAS TARGET_COLOR COMILLAS  eHex:hexa {:mundoTemp.getColorAlmace().add(casteo(hexa));:}
                     ;
 
-colorPared          ::= COMILLAS BRICK_COLOR COMILLAS  eHex:hexa {:colorPared.add(casteo(hexa));:}
+colorPared          ::= COMILLAS BRICK_COLOR COMILLAS  eHex:hexa {:mundoTemp.getColorPared().add(casteo(hexa));:}
                     ;
 
-colorCamino         ::= COMILLAS HALL_COLOR COMILLAS  eHex:hexa  {:colorCamino.add(casteo(hexa));:}
+colorCamino         ::= COMILLAS HALL_COLOR COMILLAS  eHex:hexa  {:mundoTemp.getColorCamino().add(casteo(hexa));:}
                     ;
 
-noDefinido          ::= COMILLAS UNDEFINED_COLOR COMILLAS  eHex:hexa {:colorLugarNoDefinido.add(casteo(hexa));:}
+noDefinido          ::= COMILLAS UNDEFINED_COLOR COMILLAS  eHex:hexa {:mundoTemp.getColorLugarNoDefinido().add(casteo(hexa));:}
                     ;
 
-colorJugador        ::= COMILLAS COLOR_JUGADOR COMILLAS eHex:hexa {:colorJugador.add(casteo(hexa));:}
+colorJugador        ::= COMILLAS COLOR_JUGADOR COMILLAS eHex:hexa {:mundoTemp.getColorJugador().add(casteo(hexa));:}
                     ;
 
 
@@ -220,7 +215,7 @@ algo    ::=     algomas COMA algo {::}
         |       algomas {::}
         ;
 
-algomas ::=     LLAVEABIERTA otraCosa   LLAVECERRADA {:casillas.add(casillaTemp);
+algomas ::=     LLAVEABIERTA otraCosa   LLAVECERRADA {:mundoTemp.getCasillas().add(casillaTemp);
                                                         casillaTemp = new Casillas();:}
         ;
 
@@ -231,8 +226,18 @@ info    ::=     posEjes{::}
         |       tipo
         ;
 
-posEjes ::=     COMILLAS POSX:posxx COMILLAS DOSPUNTOS opNum:n1 {:casillaTemp.setPosX(castEntero(n1));:}
-        |       COMILLAS POSY:posyy COMILLAS DOSPUNTOS opNum:n1 {:casillaTemp.setPosY(castEntero(n1));:}
+posEjes ::=     COMILLAS POSX:posxx COMILLAS DOSPUNTOS opNum:n1 {:casillaTemp.setPosX(castEntero(n1));
+                if(0>castEntero(n1)){
+                        Errores e = new Errores(n1.toString(), "Semantico", "Numero negativo", n1left, n1right);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
+        |       COMILLAS POSY:posyy COMILLAS DOSPUNTOS opNum:n1 {:casillaTemp.setPosY(castEntero(n1));
+                        if(0>castEntero(n1)){
+                        Errores e = new Errores(n1.toString(), "Semantico", "Numero negativo", n1left, n1right);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
         ;
         
 tipo1   ::=     COMILLAS TYPE COMILLAS DOSPUNTOS
@@ -245,9 +250,7 @@ l       ::=     BRICK:tip{:casillaTemp.setTipo(casteo(tip));:}
         |       HALL:tip{:casillaTemp.setTipo(casteo(tip));:}
         ;
 
- opNum  ::=    COMILLAS a:n1 COMILLAS {:RESULT = (double)n1;:}
-        |       a:n1 {:RESULT = (double)n1;:}
-        ;
+
 
 //guardado para almacen 
 targets ::=     COMILLAS TARGETS COMILLAS DOSPUNTOS CORCHETEABIERTO infoTarjeta CORCHETECERRADO {::}
@@ -257,7 +260,7 @@ infoTarjeta     ::=     estruct1 COMA infoTarjeta {::}
                 |       estruct1 {::}
                 ;
 
-estruct1        ::=      LLAVEABIERTA infoExactaTarjeta LLAVECERRADA {:almacen.add(almacenTemo);
+estruct1        ::=      LLAVEABIERTA infoExactaTarjeta LLAVECERRADA {:mundoTemp.getAlmacen().add(almacenTemo);
                         almacenTemo = new Almacen();:}
                 ;
 
@@ -265,12 +268,22 @@ infoExactaTarjeta       ::=     posTarjeta COMA infoExactaTarjeta {::}
                         |       posTarjeta {::}
                         ;
 
-posTarjeta      ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum:num {:almacenTemo.setPosX(castEntero(num));:}
-                |       COMILLAS POSY COMILLAS DOSPUNTOS opNum:num {:almacenTemo.setPosY(castEntero(num));:}
+posTarjeta      ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum:num {:almacenTemo.setPosX(castEntero(num));
+                if(0>castEntero(num)){
+                        Errores e = new Errores(num.toString(), "Semantico", "Numero negativo", numleft, numright);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
+                |       COMILLAS POSY COMILLAS DOSPUNTOS opNum:num {:almacenTemo.setPosY(castEntero(num));
+                if(0>castEntero(num)){
+                        Errores e = new Errores(num.toString(), "Semantico", "Numero negativo", numleft, numright);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
                 ;
 
 //Posicion de jugador
-player  ::=     COMILLAS PLAYER COMILLAS DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA {:jugador1.add(jugadorTemp);
+player  ::=     COMILLAS PLAYER COMILLAS DOSPUNTOS LLAVEABIERTA posJugador LLAVECERRADA {:mundoTemp.getJugador().add(jugadorTemp);
                 jugadorTemp = new Jugador();:}
         ;
 
@@ -278,10 +291,20 @@ posJugador      ::=     posJugador COMA  ePosJ {::}
                 |       ePosJ {::}
                 ;
 
-posXJ   ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum:num {:jugadorTemp.setPosX(castEntero(num));:}
+posXJ   ::=     COMILLAS POSX COMILLAS DOSPUNTOS opNum:num {:jugadorTemp.setPosX(castEntero(num));
+                if(0>castEntero(num)){
+                        Errores e = new Errores(num.toString(), "Semantico", "Numero negativo", numleft, numright);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
         ;
 
-posYJ   ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum:num {:jugadorTemp.setPosY(castEntero(num));:}
+posYJ   ::=     COMILLAS POSY COMILLAS DOSPUNTOS opNum:num {:jugadorTemp.setPosY(castEntero(num));
+                if(0>castEntero(num)){
+                        Errores e = new Errores(num.toString(), "Semantico", "Numero negativo", numleft, numright);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
         ;
 
 ePosJ   ::=     posXJ {::}
@@ -296,16 +319,29 @@ box     ::=     box COMA caja
         |       caja
         ;
 
-caja    ::=     LLAVEABIERTA posCaja LLAVECERRADA {:cajas.add(cajaTemp);
+caja    ::=     LLAVEABIERTA posCaja LLAVECERRADA {:mundoTemp.getCajas().add(cajaTemp);
         cajaTemp = new Caja();:}
         ;
 
 posCaja ::=     posCaja COMA posEjes1
         |       posEjes1
         ;
-posEjes1        ::=     COMILLAS POSX:posxx COMILLAS DOSPUNTOS opNum:n1 {:cajaTemp.setPosX(castEntero(n1));:}
-                |       COMILLAS POSY:posyy COMILLAS DOSPUNTOS opNum:n1 {:cajaTemp.setPosY(castEntero(n1));:}
+posEjes1        ::=     COMILLAS POSX:posxx COMILLAS DOSPUNTOS opNum:n1 {:cajaTemp.setPosX(castEntero(n1));
+                        if(0>castEntero(n1)){
+                        Errores e = new Errores(n1.toString(), "Semantico", "Numero negativo", n1left, n1right);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
+                |       COMILLAS POSY:posyy COMILLAS DOSPUNTOS opNum:n1 {:cajaTemp.setPosY(castEntero(n1));
+                        if(0>castEntero(n1)){
+                        Errores e = new Errores(n1.toString(), "Semantico", "Numero negativo", n1left, n1right);
+                        mundoTemp.getErrores().add(e);
+
+                }:}
                 ;
+ opNum  ::=    COMILLAS a:n1 COMILLAS {:RESULT = (double)n1;:}
+        |       a:n1 {:RESULT = (double)n1;:}
+        ;
 //NUMERO
 a ::=   a:n1 MAS b:n2 {:RESULT = (double)n1 +(double) n2;  :}
         | a:n1 MENOS b:n2 {: RESULT = (double)n1 - (double)n2; :}
@@ -313,7 +349,13 @@ a ::=   a:n1 MAS b:n2 {:RESULT = (double)n1 +(double) n2;  :}
         ;
 
 b ::=   b:n1 MULTIPLICAR c:n2 {: RESULT = (double)n1 * (double)n2; :}
-        | b:n1 DIAGONAL c:n2 {: RESULT = (double)n1/(double)n2; :}
+        | b:n1 DIAGONAL c:n2 {: 
+        if(castEntero(n2) == 0 ){
+                Errores e = new Errores(n2.toString(), "Semantico", "No se puede dividir entre 0", n2left, n2right);
+                mundoTemp.getErrores().add(e);
+                RESULT = 0D; 
+        }
+        else{RESULT = (double)n1/(double)n2;}:}
         | MENOS c:n1 {: RESULT = -1 *(double) n1; :}
         | c:n1 {: RESULT = (double)n1; :}
         ;
@@ -325,6 +367,15 @@ c ::=   d:n1 POTENCIA c:n2 {: :}
         ;
 
 d ::=   NUMERO:n1 {: RESULT = Double.valueOf(n1.toString());:}
-        | DECIMAL:n1 {:RESULT = Double.valueOf(n1.toString());:}       
+        | DECIMAL:n1 {:RESULT = Double.valueOf(n1.toString());:}
+        | tipoCeil:n1 {:RESULT = Double.valueOf(n1.toString());:}      
         | PARENTESISABIERTO a:n1 PARENTESISCERRADO {: RESULT = (double)n1; :}
         ;
+ tipoCeil       ::= FLOOR PARENTESISABIERTO a:num PARENTESISCERRADO {:		
+                double a = Math.floor(casteoNumero(num));                        
+                RESULT = (double)a;:}  
+                |  CEIL PARENTESISABIERTO a:num PARENTESISCERRADO   {:
+                double a = Math.ceil(casteoNumero(num));                        
+                RESULT = (double)a;:}
+                ;
+

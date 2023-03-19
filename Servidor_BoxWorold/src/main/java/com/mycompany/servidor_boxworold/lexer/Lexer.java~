@@ -885,17 +885,17 @@ public class Lexer implements java_cup.runtime.Scanner {
             // fall through
           case 63: break;
           case 24: 
-            { /*System.out.println(yytext());*/return new Symbol(sym.POSX,yyline+1,yycolumn+1,yytext(),yytext());
+            { /*System.out.println(yytext());*/return new Symbol(sym.POSX,yyline+1,yycolumn+1,yytext());
             } 
             // fall through
           case 64: break;
           case 25: 
-            { /*System.out.println(yytext());*/return new Symbol(sym.POSY,yyline+1,yycolumn+1,yytext(),yytext());
+            { /*System.out.println(yytext());*/return new Symbol(sym.POSY,yyline+1,yycolumn+1,yytext());
             } 
             // fall through
           case 65: break;
           case 26: 
-            { /*System.out.println(yytext());*/return new Symbol(sym.TYPE,yyline+1,yycolumn+1,yytext(),yytext());
+            { /*System.out.println(yytext());*/return new Symbol(sym.TYPE,yyline+1,yycolumn+1,yytext());
             } 
             // fall through
           case 66: break;
@@ -955,7 +955,7 @@ public class Lexer implements java_cup.runtime.Scanner {
             // fall through
           case 77: break;
           case 38: 
-            { /*System.out.println(yytext());*/return new Symbol(sym.TARGET_COLOR,yyline+1,yycolumn+1,yytext(),yytext());
+            { /*System.out.println(yytext());*/return new Symbol(sym.TARGET_COLOR,yyline+1,yycolumn+1,yytext());
             } 
             // fall through
           case 78: break;

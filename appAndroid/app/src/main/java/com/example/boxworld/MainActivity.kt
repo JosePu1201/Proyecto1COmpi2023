@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                 val DataOutputStream = DataOutputStream(socket.getOutputStream())
                 val DataInputStream = DataInputStream(socket.getInputStream())
                 DataOutputStream.writeUTF(txt)
+                val sal = DataInputStream.readUTF()
+                editor.setText(sal)
                 socket.close()
             }
         })

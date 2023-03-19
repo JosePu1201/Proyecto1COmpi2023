@@ -69,52 +69,36 @@ direccion	::=	UP:sal {:RESULT = sal;:}
 mov	  	::= direccion:dir entrada:num {:
                 if(texto(dir).equals("up")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ARRIBA,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ABAJO,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                         }
                 else if(texto(dir).equals("down")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ABAJO,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.ARRIBA,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                         }                       
                 else if(texto(dir).equals("left")){
 
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.IZQUIERDA,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.DERECHA,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                                                 
                 }
                 else if(texto(dir).equals("right")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Movimiento mov = new Movimiento(Direccion.DERECHA,casteoNumero(num));
-                                System.out.println(mov.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Movimiento mov = new Movimiento(Direccion.IZQUIERDA,(casteoNumero(num)*-1));
-                                System.out.println(mov.toString());
                         }
                         
                 }:}
@@ -127,51 +111,36 @@ entrada ::=	PARENTESISABIERTO opNumero:num PARENTESISCERRADO PUNTOYCOMA {:RESULT
 push	::= PUSH direccion:dir entrada:num {:
                 if(texto(dir).equals("up")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.ARRIBA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Push push = new Push(Direccion.ABAJO,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         }
                 else if(texto(dir).equals("down")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.ABAJO,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
                                 Push push = new Push(Direccion.ARRIBA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         }                       
                 else if(texto(dir).equals("left")){
 
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.IZQUIERDA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Push push = new Push(Direccion.DERECHA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                                                 
                 }
                 else if(texto(dir).equals("right")){
                         if(0<casteoNumero(num)){
-                                System.out.println("mayor que 0");
                                 Push push = new Push(Direccion.DERECHA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         else{   
-                                System.out.println("menor que 0");
                                 Push push = new Push(Direccion.IZQUIERDA,casteoNumero(num));
-                                System.out.println(push.toString());
                         }
                         
                 }
@@ -213,25 +182,4 @@ tipo    ::=     COMILLAS WOROLDS COMILLAS DOSPUNTOS COMILLAS ALL COMILLAS {:name
         |       COMILLAS WOROLD COMILLAS DOSPUNTOS COMILLAS ID:h COMILLAS   {:name = texto(h);:}
         ;        
 
-/* 
-a ::=   a SUMA b {::}
-        | a RESTA b {::}
-        | b {::}
-        ;
-
-b ::=   b MULTI c {::}
-        | b DIV c {::}
-        | RESTA c {::}
-        | c {::}
-        ;
-
-c ::=   d POTENCIA c {::}
-        | d POTENCIA RESTA c {::}
-        | RAIZ PARENTESISABIERTO a PARENTESISCERRADO {::}
-        | d {::}
-        ;
-
-d ::=   NUMERO {::}
-        | PARENTESISABIERTO a PARENTESISCERRADO {::}
-        ;
-*/		
+	
